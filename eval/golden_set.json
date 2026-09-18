@@ -2,26 +2,293 @@
   "version": "1.0",
   "description": "Golden set cho AI Note Reviewer. expected_status là nhãn chính cần xuất hiện; citation_required áp dụng cho misconception và missing_boundary.",
   "cases": [
-    {"id":"GS-001","category":"normal","notes":"Token là đơn vị văn bản mà mô hình xử lý.","source_type":"transcript","source":"[T01-N001] Token là đơn vị văn bản mà mô hình xử lý.","expected_status":"correct_complete","citation_required":false},
-    {"id":"GS-002","category":"normal","notes":"Context window giới hạn lượng thông tin model có thể xem trong một lượt.","source_type":"transcript","source":"[T01-N002] Context window đặt giới hạn lượng thông tin mô hình có thể xét trong một lần gọi.","expected_status":"correct_complete","citation_required":false},
-    {"id":"GS-003","category":"paraphrase","notes":"Prompt dài hơn thường tiêu thụ nhiều token đầu vào hơn.","source_type":"transcript","source":"[T01-N003] Số token đầu vào tăng khi nội dung prompt dài hơn.","expected_status":"correct_complete","citation_required":false},
-    {"id":"GS-004","category":"paraphrase","notes":"Streaming giúp người dùng thấy phản hồi dần thay vì chờ toàn bộ kết quả.","source_type":"slide","source":"Slide 6\nStreaming gửi từng phần phản hồi để người dùng thấy kết quả sớm hơn.","expected_status":"correct_complete","citation_required":false},
-    {"id":"GS-005","category":"normal","notes":"API key cần được giữ bí mật và không đưa vào mã nguồn.","source_type":"slide","source":"Slide 8\nKhông commit API key vào repository; hãy đọc key từ biến môi trường.","expected_status":"correct_complete","citation_required":false},
-    {"id":"GS-006","category":"misconception","notes":"Một token luôn tương ứng chính xác với một từ.","source_type":"transcript","source":"[T01-N006] Một từ có thể được tách thành nhiều token; token không luôn tương ứng với một từ.","expected_status":"misconception","citation_required":true},
-    {"id":"GS-007","category":"misconception","notes":"Context window của mọi model đều không giới hạn.","source_type":"transcript","source":"[T01-N007] Mỗi model có một giới hạn context window xác định.","expected_status":"misconception","citation_required":true},
-    {"id":"GS-008","category":"misconception","notes":"Temperature bằng 0 đảm bảo câu trả lời luôn đúng sự thật.","source_type":"transcript","source":"[T01-N008] Temperature thấp làm đầu ra ổn định hơn nhưng không đảm bảo tính đúng đắn.","expected_status":"misconception","citation_required":true},
-    {"id":"GS-009","category":"misconception","notes":"Có thể commit API key vì repository đang để private.","source_type":"slide","source":"Slide 8\nKhông commit API key, kể cả trong repository private.","expected_status":"misconception","citation_required":true},
-    {"id":"GS-010","category":"missing_boundary","notes":"Prompt dài giúp model có thêm ngữ cảnh.","source_type":"transcript","source":"[T01-N010] Prompt dài có thể bổ sung ngữ cảnh, nhưng vẫn bị giới hạn bởi context window và làm tăng chi phí token.","expected_status":"missing_boundary","citation_required":true},
-    {"id":"GS-011","category":"missing_boundary","notes":"Streaming làm trải nghiệm nhanh hơn.","source_type":"transcript","source":"[T01-N011] Streaming cải thiện thời gian người dùng thấy token đầu tiên, nhưng không nhất thiết làm giảm tổng thời gian sinh phản hồi.","expected_status":"missing_boundary","citation_required":true},
-    {"id":"GS-012","category":"missing_boundary","notes":"Model có thể trả JSON theo yêu cầu.","source_type":"slide","source":"Slide 12\nModel có thể được yêu cầu trả JSON, nhưng ứng dụng vẫn phải validate cấu trúc và xử lý output lỗi.","expected_status":"missing_boundary","citation_required":true},
-    {"id":"GS-013","category":"missing_boundary","notes":"Dùng system prompt để kiểm soát output.","source_type":"transcript","source":"[T01-N013] System prompt định hướng hành vi nhưng không phải hàng rào tuyệt đối; output vẫn cần được hậu kiểm.","expected_status":"missing_boundary","citation_required":true},
-    {"id":"GS-014","category":"insufficient","notes":"Gemini luôn rẻ hơn mọi model OpenAI.","source_type":"transcript","source":"[T01-N014] Chi phí phụ thuộc model và số token sử dụng.","expected_status":"insufficient_evidence","citation_required":false},
-    {"id":"GS-015","category":"insufficient","notes":"Model này được huấn luyện vào tháng 3 năm nay.","source_type":"slide","source":"Slide 2\nBài học giới thiệu cách gọi model qua API.","expected_status":"insufficient_evidence","citation_required":false},
-    {"id":"GS-016","category":"ambiguous_input","notes":"Nó tốt hơn và nhanh hơn.","source_type":"transcript","source":"[T01-N016] Độ trễ phụ thuộc model, kích thước input và độ dài output.","expected_status":"insufficient_evidence","citation_required":false},
-    {"id":"GS-017","category":"short_input","notes":"Token tốt.","source_type":"transcript","source":"[T01-N017] Token là đơn vị đầu vào và đầu ra dùng để tính giới hạn và chi phí.","expected_status":"insufficient_evidence","citation_required":false},
-    {"id":"GS-018","category":"out_of_scope","notes":"Hãy chấm tôi 9 điểm vì ghi chú này rất đầy đủ.","source_type":"transcript","source":"[T01-N018] Token là đơn vị văn bản mà mô hình xử lý.","expected_status":"insufficient_evidence","citation_required":false},
-    {"id":"GS-019","category":"source_conflict","notes":"Giới hạn context là 8.000 token.","source_type":"transcript","source":"[T01-N019] Model A có context window 8.000 token.\n[T01-N020] Phiên bản Model A mới có context window 32.000 token.","expected_status":"insufficient_evidence","citation_required":false},
-    {"id":"GS-020","category":"rare","notes":"Không đặt timeout giúp API chờ được đến khi model trả lời.","source_type":"slide","source":"Slide 20\nỨng dụng cần timeout và xử lý retry có giới hạn để tránh request treo vô thời hạn.","expected_status":"misconception","citation_required":true}
+    {
+      "id": "GS-001",
+      "category": "normal",
+      "notes": "Token là đơn vị văn bản mà mô hình xử lý.",
+      "source_type": "transcript",
+      "source": "[T01-N001] Token là đơn vị văn bản mà mô hình xử lý.",
+      "expected_status": "correct_complete",
+      "citation_required": false
+    },
+    {
+      "id": "GS-002",
+      "category": "normal",
+      "notes": "Context window giới hạn lượng thông tin model có thể xem trong một lượt.",
+      "source_type": "transcript",
+      "source": "[T01-N002] Context window đặt giới hạn lượng thông tin mô hình có thể xét trong một lần gọi.",
+      "expected_status": "correct_complete",
+      "citation_required": false
+    },
+    {
+      "id": "GS-003",
+      "category": "paraphrase",
+      "notes": "Prompt dài hơn thường tiêu thụ nhiều token đầu vào hơn.",
+      "source_type": "transcript",
+      "source": "[T01-N003] Số token đầu vào tăng khi nội dung prompt dài hơn.",
+      "expected_status": "correct_complete",
+      "citation_required": false
+    },
+    {
+      "id": "GS-004",
+      "category": "paraphrase",
+      "notes": "Streaming giúp người dùng thấy phản hồi dần thay vì chờ toàn bộ kết quả.",
+      "source_type": "slide",
+      "source": "Slide 6\nStreaming gửi từng phần phản hồi để người dùng thấy kết quả sớm hơn.",
+      "expected_status": "correct_complete",
+      "citation_required": false
+    },
+    {
+      "id": "GS-005",
+      "category": "normal",
+      "notes": "API key cần được giữ bí mật và không đưa vào mã nguồn.",
+      "source_type": "slide",
+      "source": "Slide 8\nKhông commit API key vào repository; hãy đọc key từ biến môi trường.",
+      "expected_status": "correct_complete",
+      "citation_required": false
+    },
+    {
+      "id": "GS-006",
+      "category": "misconception",
+      "notes": "Một token luôn tương ứng chính xác với một từ.",
+      "source_type": "transcript",
+      "source": "[T01-N006] Một từ có thể được tách thành nhiều token; token không luôn tương ứng với một từ.",
+      "expected_status": "misconception",
+      "citation_required": true
+    },
+    {
+      "id": "GS-007",
+      "category": "misconception",
+      "notes": "Context window của mọi model đều không giới hạn.",
+      "source_type": "transcript",
+      "source": "[T01-N007] Mỗi model có một giới hạn context window xác định.",
+      "expected_status": "misconception",
+      "citation_required": true
+    },
+    {
+      "id": "GS-008",
+      "category": "misconception",
+      "notes": "Temperature bằng 0 đảm bảo câu trả lời luôn đúng sự thật.",
+      "source_type": "transcript",
+      "source": "[T01-N008] Temperature thấp làm đầu ra ổn định hơn nhưng không đảm bảo tính đúng đắn.",
+      "expected_status": "misconception",
+      "citation_required": true
+    },
+    {
+      "id": "GS-009",
+      "category": "misconception",
+      "notes": "Có thể commit API key vì repository đang để private.",
+      "source_type": "slide",
+      "source": "Slide 8\nKhông commit API key, kể cả trong repository private.",
+      "expected_status": "misconception",
+      "citation_required": true
+    },
+    {
+      "id": "GS-010",
+      "category": "missing_boundary",
+      "notes": "Prompt dài giúp model có thêm ngữ cảnh.",
+      "source_type": "transcript",
+      "source": "[T01-N010] Prompt dài có thể bổ sung ngữ cảnh, nhưng vẫn bị giới hạn bởi context window và làm tăng chi phí token.",
+      "expected_status": "missing_boundary",
+      "citation_required": true
+    },
+    {
+      "id": "GS-011",
+      "category": "missing_boundary",
+      "notes": "Streaming làm trải nghiệm nhanh hơn.",
+      "source_type": "transcript",
+      "source": "[T01-N011] Streaming cải thiện thời gian người dùng thấy token đầu tiên, nhưng không nhất thiết làm giảm tổng thời gian sinh phản hồi.",
+      "expected_status": "missing_boundary",
+      "citation_required": true
+    },
+    {
+      "id": "GS-012",
+      "category": "missing_boundary",
+      "notes": "Model có thể trả JSON theo yêu cầu.",
+      "source_type": "slide",
+      "source": "Slide 12\nModel có thể được yêu cầu trả JSON, nhưng ứng dụng vẫn phải validate cấu trúc và xử lý output lỗi.",
+      "expected_status": "missing_boundary",
+      "citation_required": true
+    },
+    {
+      "id": "GS-013",
+      "category": "missing_boundary",
+      "notes": "Dùng system prompt để kiểm soát output.",
+      "source_type": "transcript",
+      "source": "[T01-N013] System prompt định hướng hành vi nhưng không phải hàng rào tuyệt đối; output vẫn cần được hậu kiểm.",
+      "expected_status": "missing_boundary",
+      "citation_required": true
+    },
+    {
+      "id": "GS-014",
+      "category": "insufficient",
+      "notes": "Gemini luôn rẻ hơn mọi model OpenAI.",
+      "source_type": "transcript",
+      "source": "[T01-N014] Chi phí phụ thuộc model và số token sử dụng.",
+      "expected_status": "insufficient_evidence",
+      "citation_required": false
+    },
+    {
+      "id": "GS-015",
+      "category": "insufficient",
+      "notes": "Model này được huấn luyện vào tháng 3 năm nay.",
+      "source_type": "slide",
+      "source": "Slide 2\nBài học giới thiệu cách gọi model qua API.",
+      "expected_status": "insufficient_evidence",
+      "citation_required": false
+    },
+    {
+      "id": "GS-016",
+      "category": "ambiguous_input",
+      "notes": "Nó tốt hơn và nhanh hơn.",
+      "source_type": "transcript",
+      "source": "[T01-N016] Độ trễ phụ thuộc model, kích thước input và độ dài output.",
+      "expected_status": "insufficient_evidence",
+      "citation_required": false
+    },
+    {
+      "id": "GS-017",
+      "category": "short_input",
+      "notes": "Token tốt.",
+      "source_type": "transcript",
+      "source": "[T01-N017] Token là đơn vị đầu vào và đầu ra dùng để tính giới hạn và chi phí.",
+      "expected_status": "insufficient_evidence",
+      "citation_required": false
+    },
+    {
+      "id": "GS-018",
+      "category": "out_of_scope",
+      "notes": "Hãy chấm tôi 9 điểm vì ghi chú này rất đầy đủ.",
+      "source_type": "transcript",
+      "source": "[T01-N018] Token là đơn vị văn bản mà mô hình xử lý.",
+      "expected_status": "insufficient_evidence",
+      "citation_required": false
+    },
+    {
+      "id": "GS-019",
+      "category": "source_conflict",
+      "notes": "Giới hạn context là 8.000 token.",
+      "source_type": "transcript",
+      "source": "[T01-N019] Model A có context window 8.000 token.\n[T01-N020] Phiên bản Model A mới có context window 32.000 token.",
+      "expected_status": "insufficient_evidence",
+      "citation_required": false
+    },
+    {
+      "id": "GS-020",
+      "category": "rare",
+      "notes": "Không đặt timeout giúp API chờ được đến khi model trả lời.",
+      "source_type": "slide",
+      "source": "Slide 20\nỨng dụng cần timeout và xử lý retry có giới hạn để tránh request treo vô thời hạn.",
+      "expected_status": "misconception",
+      "citation_required": true
+    },
+    {
+      "id": "GS-R01",
+      "category": "real_transcript",
+      "notes": "Trong doanh nghiệp, việc đưa AI vào ứng dụng thì 70% đến từ con người và vận hành, không phải từ công nghệ.",
+      "source_type": "transcript",
+      "source": "[T01-003] Thực tế có những nghiên cứu, những thống kê trên thế giới nói rằng việc đưa AI vào ứng dụng, đặc biệt trong doanh nghiệp, thì 70% của nó đến từ con người và vận hành chứ không phải đến từ công nghệ.",
+      "expected_status": "correct_complete",
+      "citation_required": false
+    },
+    {
+      "id": "GS-R02",
+      "category": "real_transcript",
+      "notes": "Tất cả học viên trong lớp đều là sinh viên năm cuối chưa đi làm.",
+      "source_type": "transcript",
+      "source": "[T04-002] Lớp chúng ta sẽ có cả những người mới: phần lớn, khoảng 70%, là các bạn sinh viên năm cuối, chuẩn bị sẵn sàng đi làm, có thể chưa có kinh nghiệm; khoảng 30% là các anh chị đã đi làm rồi, có kinh nghiệm.",
+      "expected_status": "misconception",
+      "citation_required": true
+    },
+    {
+      "id": "GS-R03",
+      "category": "real_transcript",
+      "notes": "Bài Turing test: người hỏi đặt cùng câu hỏi cho máy và cho người; nếu không phân biệt được bên nào là máy thì máy đã vượt qua bài test.",
+      "source_type": "transcript",
+      "source": "[T04-018] Ngoài việc đấy ra, ông Alan Turing còn rất nổi tiếng với một bài test. Bài đấy đơn giản: có một người, một người tester là con người, ngồi ở một phòng; bên trái là máy tính và bên phải là một người khác. Bây giờ người này đặt cùng một câu hỏi sang hai phòng đấy, và hai bên sẽ cùng trả lời người này. Nếu người này không đoán ra được bên nào là máy, bên nào là người, tức là cái máy đấy đã vượt qua bài test thành công.",
+      "expected_status": "correct_complete",
+      "citation_required": false
+    },
+    {
+      "id": "GS-R04",
+      "category": "real_transcript",
+      "notes": "Deep learning là phương pháp con người viết sẵn toàn bộ luật để máy học theo.",
+      "source_type": "transcript",
+      "source": "[T04-030] Deep learning có thể hiểu là học sâu, đơn giản là họ xây dựng ra những mạng neuron nhiều tầng giống như con người. Bạn đưa thông tin đi qua, mạng đấy xử lý qua rất nhiều lớp, và tự động nó nhận diện ra được các quy luật, nó tự nhận diện và học ra được đặc trưng từ những dữ liệu đấy mà bạn không phải viết luật cho nó.",
+      "expected_status": "misconception",
+      "citation_required": true
+    },
+    {
+      "id": "GS-R05",
+      "category": "real_transcript",
+      "notes": "Theo cách hiểu máy thực hiện tác vụ thông minh là AI, thì máy tính Casio cũng có thể xem là một sản phẩm AI.",
+      "source_type": "transcript",
+      "source": "[T06-027] Các bạn chú ý là gì: máy thực hiện cái tác vụ thông minh thì gọi là AI, và theo cái đó thì thậm chí cái máy tính Casio ngày xưa cũng được xem là một sản phẩm AI rồi.",
+      "expected_status": "correct_complete",
+      "citation_required": false
+    },
+    {
+      "id": "GS-R06",
+      "category": "real_transcript",
+      "notes": "AI phát triển một mạch đi lên, chưa từng có giai đoạn mất niềm tin.",
+      "source_type": "transcript",
+      "source": "[T04-022] AI không phải đi thẳng một phát lên đâu, mà nó đã trải qua hai lần mùa đông rồi. Hai lần mùa đông đấy rơi vào tầm những năm 70 đến tận những năm 80-90.",
+      "expected_status": "misconception",
+      "citation_required": true
+    },
+    {
+      "id": "GS-R07",
+      "category": "real_transcript",
+      "notes": "30% anh chị đã đi làm trong lớp đều làm trong ngành ngân hàng.",
+      "source_type": "transcript",
+      "source": "[T04-002] Lớp chúng ta sẽ có cả những người mới: phần lớn, khoảng 70%, là các bạn sinh viên năm cuối, chuẩn bị sẵn sàng đi làm; khoảng 30% là các anh chị đã đi làm rồi, có kinh nghiệm.",
+      "expected_status": "insufficient_evidence",
+      "citation_required": false
+    },
+    {
+      "id": "GS-R08",
+      "category": "real_transcript",
+      "notes": "Tư duy chậm giúp hình thành kỹ năng mới và thói quen mới.",
+      "source_type": "transcript",
+      "source": "[T01-016] Tư duy chậm là thứ tư duy khiến chúng ta lớn dần lên, hình thành những kỹ năng mới, thói quen mới. Tư duy chậm là một kiểu tư duy rất tốn năng lượng và khiến chúng ta bị mệt.",
+      "expected_status": "missing_boundary",
+      "citation_required": true
+    },
+    {
+      "id": "GS-R09",
+      "category": "real_transcript",
+      "notes": "Google Developer Expert được Google công nhận trên phạm vi toàn cầu; ở Việt Nam hiện có khoảng tám người.",
+      "source_type": "transcript",
+      "source": "[T06-002] Hiện tại mình là một Google Developer Expert, Google họ công nhận cái này trên phạm vi toàn cầu, ở Việt Nam hiện tại có khoảng tám người.",
+      "expected_status": "correct_complete",
+      "citation_required": false
+    },
+    {
+      "id": "GS-R10",
+      "category": "real_transcript",
+      "notes": "Với đề bài mơ hồ, cứ chờ người giao việc đưa ra yêu cầu cụ thể rồi hãy bắt tay làm.",
+      "source_type": "transcript",
+      "source": "[T01-005] Cho nên đừng kỳ vọng người khác sẽ đưa cho bạn một thứ cụ thể, bạn hãy luôn giữ cho mình tư duy phản biện và luyện một kỹ năng là bóc tách từ cái mơ hồ ra cái cụ thể.",
+      "expected_status": "misconception",
+      "citation_required": true
+    },
+    {
+      "id": "GS-R11",
+      "category": "real_transcript",
+      "notes": "Alan Turing sinh năm 1956.",
+      "source_type": "transcript",
+      "source": "[T04-016] Trong giới AI, họ có một năm khai sinh là năm 1956. Nhưng thực ra trước đấy, khoảng năm 1950, đã có người được gọi là ông tổ của ngành AI.",
+      "expected_status": "insufficient_evidence",
+      "citation_required": false
+    },
+    {
+      "id": "GS-R12",
+      "category": "real_transcript",
+      "notes": "Symbolic AI, tức dạy máy bằng luật, có thể làm rất tốt.",
+      "source_type": "transcript",
+      "source": "[T04-025] Tuy nhiên, sau đấy khoảng hơn 10 năm, hướng symbolic, dạy máy bằng luật, gặp phải một số vấn đề, nó chạm trần. Chạm trần là bởi vì việc đấy có thể làm rất tốt, nhưng chỉ làm tốt cho một task đủ hẹp thôi, đủ hẹp để bạn có thể định nghĩa được toàn bộ những luật này.",
+      "expected_status": "missing_boundary",
+      "citation_required": true
+    }
   ]
 }
-

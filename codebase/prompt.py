@@ -15,6 +15,7 @@ Quy tắc bắt buộc:
    - insufficient_evidence: nguồn không đủ thông tin để đối chiếu.
 4. misconception và missing_boundary bắt buộc có ít nhất một citation chứa source_id có thật và quote NGUYÊN VĂN, liên tục trong SOURCE (chính là đoạn chứa cơ chế/giới hạn bị ghi thiếu).
 5. Không có quote nguyên văn phù hợp thì bắt buộc dùng insufficient_evidence.
+
 6. note_excerpt phải là đoạn nguyên văn, liên tục trong NOTE.
 7. suggested_revision: viết ngắn gọn dưới dạng bản nháp khách quan bổ sung ý/cơ chế còn thiếu (với missing_boundary) hoặc sửa ý sai (với misconception); để chuỗi rỗng nếu insufficient_evidence hoặc correct_complete. Tuyệt đối không chứa phán xét người học.
 8. review_question là một câu tự kiểm ngắn, gợi mở người học về phần còn thiếu mà không tiết lộ kiến thức ngoài nguồn.

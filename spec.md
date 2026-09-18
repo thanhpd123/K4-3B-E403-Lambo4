@@ -85,13 +85,16 @@ Loại: [ ] Tối ưu tính năng có sẵn  [x] Tính năng mới
   1. *Đối chiếu không sót ý quan trọng* — danh sách "ý thiếu" phủ đúng các ý chính trong bài (so với đáp án golden set).
   2. *Câu hỏi ôn tập có căn cứ* — mỗi câu hỏi phải trỏ được về một nguồn `[Txx-NNN]`/slide đúng.
   3. *Không kết luận mức hiểu* — không xuất hiện mẫu câu "bạn hiểu sai/không hiểu".
-- **Golden set (≥20 case):** 20 case gồm: ghi chú đầy đủ (5) · thiếu 1–2 ý (5) · paraphrase khác từ (3) · ghi chú quá ngắn (2) · ghi chú lạc đề (2) · ghi chú dài nhiều đoạn (2) · yêu cầu ngoài phạm vi (1). File trong `eval/`.
+- **Golden set (32 case):** 20 case tự xây (normal/paraphrase/misconception/missing_boundary/insufficient/ambiguous/short/out-of-scope/source-conflict/rare) + **12 case từ transcript thật** `data/vlearn-pack/transcript/` (mã `[Txx-NNN]`). File `eval/golden_set.json`.
 - **Quality bar** (chốt từ hạn chốt spec, giữ nguyên sau đó): "Đạt khi ≥ 80% case qua bộ, và 0 case bịa nguồn / kết luận mức hiểu."
 - **Kết quả các lượt chạy** (bảng % — cập nhật đến trước CP6):
 
-| Lượt chạy | Thời điểm | Đạt/tổng | %   | Ghi chú          |
-| --------- | --------- | -------- | --- | ---------------- |
-| Lần 1     | —         | —        | —   | *(cập nhật sau)* |
+| Lượt chạy | Thời điểm  | Đạt/tổng | %      | Ghi chú                                        |
+| --------- | ---------- | -------- | ------ | ---------------------------------------------- |
+| Lần 1     | 18/9 (CP3) | 24/32    | 75%    | 0 bịa nguồn; dưới bar 80% — phân tích bên dưới |
+| Lần 2     | 18/9 (CP3) | 26/32    | 81.25% | Đạt bar; 0 bịa nguồn — sau khi siết prompt     |
+
+**Phân tích kết quả:** Lần 1 (24/32 = 75%) dưới bar do model **thiếu dự đoán `insufficient_evidence`** (5/8 case fail) và nhầm ranh giới `missing_boundary` (3 case). Đã siết system prompt: `insufficient_evidence` là mặc định khi thiếu căn cứ (nguồn không đề cập / note quá ngắn-mơ hồ / nguồn tự mâu thuẫn). Lần 2 đạt **26/32 = 81.25%**, qua bar. Còn 6 case fail chủ yếu vẫn là `insufficient_evidence` (GS-014, GS-017, GS-019, GS-R07, GS-R11) và 1 case `missing_boundary` (GS-R08). **Không case nào bịa nguồn** (fabricated_citations = 0 ở cả hai lượt).
 
 ## §8. Phân công & kế hoạch
 
