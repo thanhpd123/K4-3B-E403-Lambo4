@@ -15,7 +15,7 @@
 
 | # | Tiêu chí xác minh của TA | Trạng thái | Vị trí chứng minh trong Repo Lambo4 |
 |:---:|---|:---:|---|
-| 1 | **Evidence đạt chuẩn A/B có log đầy đủ** | **ĐẠT** | File [`evidence/evidence_mining_and_survey.md`](evidence/evidence_mining_and_survey.md): Khảo sát $n = 22$ học viên ngoài nhóm theo Mom Test (81.8% xác nhận pain); Mining 13.494 lượt chatlog `tutor_turns.csv` (28.0% thiếu citation, 100% rỗng trường misconception). |
+| 1 | **Evidence đạt chuẩn A/B có log đầy đủ** | **ĐẠT** | File [`evidence/evidence_mining_and_survey.md`](evidence/evidence_mining_and_survey.md): Phỏng vấn sâu 2 học viên ngoài nhóm (Phạm Thanh Sơn & Trần Hoàng Duy Anh) theo Mom Test (100% xác nhận pain); Trụ cột Chuẩn B Mining 13.494 lượt chatlog `tutor_turns.csv` (28.0% thiếu citation, 100% rỗng trường misconception). |
 | 2 | **Bảng impact $\ge 3$ ứng viên + ứng viên đã loại** | **ĐẠT** | Mục `spec.md` §2: So sánh 4 ứng viên có con số (người gặp $\times$ tần suất $\times$ chi phí mất đi); giải thích loại trừ bằng số và cost-of-error. |
 | 3 | **4 lớp chỗ khó cụ thể hoá theo đúng taxonomy** | **ĐẠT** | Mục `spec.md` §5: Phủ kín 4 lớp (① Nguồn sự thật, ② Mơ hồ/thiếu thông tin, ③ Ngoài phạm vi, ④ Đặc thù domain) với 8 kịch bản rủi ro cụ thể kèm hành vi mong muốn. |
 | 4 | **$\ge 4$ nguyên tắc HAX/PAIR có vị trí áp dụng cụ thể** | **ĐẠT** | Mục `spec.md` §4b: 8 nguyên tắc (HAX G1, G2, G3, G8, G9, G10, G11 và PAIR Human Control) trỏ chính xác vào ID/class trong `index.html` và `app.js`. |
@@ -44,6 +44,6 @@ Nhóm Lambo4 chính thức công bố và khóa các chỉ số nghiệm thu ch�
 ## 4. Báo cáo tự khai phần đang hoàn thiện chuẩn bị cho CP5 (Self-Disclosure)
 
 Tuân thủ quy định *"Khai thiếu không bị trừ điểm — giấu mới bị trừ"*, nhóm Lambo4 xin tự khai các hạng mục đang được hoàn thiện trước hạn nộp cuối CP5 (22:30 18/9):
-1. **User Validation (+8 điểm Bonus R6):** Nhóm đã hẹn và đang tiến hành kiểm thử thực tế với 3 willing users ngoài nhóm (Nguyễn Văn An, Trần Thị Bình, Lê Hoàng Cường tại phòng E403), đang ghi chép log quan sát và quote phỏng vấn để hoàn thiện `validation/user_feedback_log.md`.
+1. **User Validation (+8 điểm Bonus R6):** Nhóm đã hẹn và đang tiến hành kiểm thử thực tế với 2 willing users ngoài nhóm (Phạm Thanh Sơn, Trần Hoàng Duy Anh tại phòng E403), đang ghi chép log quan sát và quote phỏng vấn để hoàn thiện `validation/user_feedback_log.md`.
 2. **Slide thuyết trình & Xuất PDF:** Đang thiết kế slide 6 trang theo chuẩn `02-guide.md` §5.1, tiến hành xuất file `demo-slides.pdf`.
 3. **Demo dự phòng & Kịch bản Dry-run:** Đang chuẩn bị kịch bản phân vai 4 thành viên và tài liệu sao lưu phòng trường hợp mạng phòng thi chập chờn.

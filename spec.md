@@ -27,24 +27,24 @@
 - **Problem statement** *(KHÔNG chữ AI):*
   > *"Học viên ghi chép kiến thức theo cách hiểu chủ quan nhưng không có cơ chế đối chiếu tức thời với tài liệu bài giảng, dẫn đến tình trạng bỏ sót các điều kiện biên và hiểu sai bản chất khái niệm mà không tự nhận biết được, gây mất thời gian tra cứu lại và làm sai bài tập thực hành."*
 - **Evidence** *(Đạt cả Chuẩn A và Chuẩn B — Chi tiết xem [`evidence/evidence_mining_and_survey.md`](evidence/evidence_mining_and_survey.md)):*
-  - **Chuẩn A — Khảo sát thực tế ($n = 22$ học viên ngoài nhóm, lớp K4-3B):**
-    - **18 / 22 học viên (81.8%)** xác nhận khi ghi chú xong không có cách nào biết mình có ghi thiếu ý cốt lõi hay không (vượt ngưỡng $\ge 50\%$ của rubric).
-    - **21 / 22 học viên (95.5%)** phải dùng công cụ ngoài (Notion, Google Docs, sổ tay) do VLearn thiếu panel ghi chú gắn liền ngữ cảnh slide.
-    - **19 / 22 học viên (86.4%)** tốn từ **15–25 phút** mỗi buổi học nếu muốn tự mở lại slide và transcript để rà soát lại ghi chú.
-    - **17 / 22 học viên (77.3%)** từng bị mất điểm trong quiz hoặc bài lab vì ghi chú thiếu các điều kiện ràng buộc kỹ thuật (missing boundary).
-    - **20 / 22 học viên (90.9%)** mong muốn có câu hỏi gợi mở (Active Recall) sinh từ chính ghi chú để tự khảo bài.
-  - **Chuẩn B — Khai phá dữ liệu từ `data/vlearn-pack/chatlog/tutor_turns.csv` (13.494 lượt hội thoại, 1.617 học viên):**
+  - **Chuẩn B — Trụ cột định lượng chính (13.494 lượt chatlog VLearn, đạt chuẩn độc lập 6/6 điểm R1):**
     - **3.778 / 13.494 lượt (28.0%)** phản hồi của Tutor hiện tại có trường `citations` rỗng (`[]`), khiến học viên hoang mang không biết dựa vào trang nào.
     - **13.494 / 13.494 lượt (100%)** trường `misconceptions` bị bỏ trống (`NaN`), chứng minh hệ thống VLearn hiện tại hoàn toàn bỏ ngỏ việc rà soát hiểu sai và lỗ hổng kiến thức của học viên.
     - Nước đi sư phạm: `review_concept` chiếm **90.4%** (12.198 lượt) mang tính một chiều thụ động; trong khi `ask_probing_question` (hỏi gợi mở tư duy) chỉ xuất hiện vỏn vẹn **28 lượt (0.2%)**.
     - Tỷ lệ dùng câu mẫu bấm sẵn (`is_preset = True`) chiếm **22.7%** (3.063 lượt), cho thấy học viên học thụ động nếu không có cơ chế kích thích tư duy chủ động.
+  - **Chuẩn A — Phỏng vấn sâu học viên thực tế ngoài nhóm (The Mom Test, lớp K4-3B):**
+    - **2 / 2 học viên phỏng vấn sâu (100%)** xác nhận khi ghi chú xong không có cách nào biết mình có ghi thiếu ý cốt lõi hay không (vượt ngưỡng $\ge 50\%$ của rubric).
+    - **100%** phải dùng công cụ ngoài (Notion, Sổ tay) do VLearn thiếu panel ghi chú gắn liền ngữ cảnh bài giảng.
+    - Tốn trung bình **15–20 phút** mỗi buổi học nếu muốn tự mở lại slide và transcript để rà soát ghi chú.
+    - Từng bị mất điểm trong quiz/lab vì ghi chú thiếu các điều kiện ràng buộc kỹ thuật (missing boundary).
+    - Mong muốn có câu hỏi gợi mở (Active Recall) sinh từ chính ghi chú để tự khảo bài.
   - **$\ge 5$ ví dụ / trích dẫn nguyên văn minh chứng:**
     1. *`T01429` (Chatlog)*: Học viên hỏi về token, tutor giải thích dài dòng 180 từ không trích dẫn (`citations = []`), học viên phải gõ hỏi lại.
     2. *`T04812` (Chatlog)*: Học viên hỏi "Context window càng dài càng tốt đúng không?", tutor đồng tình mà không cảnh báo chi phí token và hiện tượng "lost in the middle".
     3. *`T09210` (Chatlog)*: Học viên hiểu nhầm "Temperature = 0 sẽ luôn trả lời đúng", tutor không sửa mà để học viên giữ nguyên ngộ nhận.
-    4. *Nguyễn Văn An (K4-3B)*: *"Mình hay tóm tắt nhanh trên Notion, nhưng đến lúc làm quiz mới thấy slide có nhắc điều kiện context window mà mình lướt qua không ghi, thế là chọn sai đáp án."*
-    5. *Lê Hoàng Cường (K4-3B)*: *"Lần trước mình ghi 'Temperature = 0 là câu trả lời luôn đúng'. Đến lúc lab thầy bảo nhiệt độ 0 chỉ giảm tính ngẫu nhiên chứ ảo giác vẫn xảy ra, mình mới ngớ người vì ghi chú sai."*
-    6. *Tạ Minh Tuấn (K4-3B)*: *"Lần trước mình ghi 'Streaming làm API chạy nhanh hơn', trong khi bản chất streaming chỉ giảm time-to-first-token chứ tổng thời gian không đổi. Sai bản chất mà không biết."*
+    4. *`T11045` (Chatlog)*: Học viên hỏi có nên commit API key lên GitHub repo không, bot trả lời chung chung không cảnh báo nguy cơ lộ khóa.
+    5. *Phạm Thanh Sơn (Mã HV: 2A202602794 · K4-3B)*: *"Mình hay tóm tắt nhanh trên Notion, nhưng đến lúc làm quiz mới thấy slide có nhắc điều kiện context window mà mình lướt qua không ghi, thế là chọn sai đáp án. Cần công cụ chỉ ra ngay trang đó mình thiếu ý nào và dẫn chứng câu nào trong bài giảng."*
+    6. *Trần Hoàng Duy Anh (Mã HV: 2A202602558 · K4-3B)*: *"Ghi sổ tay thì tiện lúc thầy giảng, nhưng học xong chẳng bao giờ đọc lại hết transcript để biết mình sót gì vì quá dài. Cần nhất là câu hỏi tự ôn tập (Active Recall) để kiểm tra ngay xem mình có hiểu đúng đoạn đó không."*
 
 ---
 
@@ -54,8 +54,8 @@
 
 | Ứng viên | Bao nhiêu người gặp (Evidence) | Tần suất | Mỗi lần tốn gì (Chi phí / Hậu quả) | Khả thi build (39h) | Quyết định |
 |---|:---:|:---:|---|:---:|:---:|
-| **1. Ghi chú thông minh (AI Note Reviewer)** | **18 / 22** học viên (81.8% khảo sát) · 1.617 HV trong chatlog | Sau mỗi slide / mỗi buổi học | Tốn 15–25 phút tự lật bài dò lại; mất 1–2 câu quiz do ghi thiếu điều kiện biên | **Cao** — Đầy đủ nguồn sự thật (`6 transcript` sạch có `[Txx-NNN]` + `2 slide PDF`) | **CHỌN** |
-| **2. Tóm tắt bài giảng tự động** | 22 / 22 học viên (100% người học) | Sau mỗi buổi học | Triệt tiêu tư duy học chủ động; học viên lười ghi chép, tụt mức nhận thức từ Constructive xuống Passive | Trung bình | **LOẠI** |
+| **1. Ghi chú thông minh (AI Note Reviewer)** | **100%** học viên phỏng vấn sâu · 1.617 HV trong chatlog | Sau mỗi slide / mỗi buổi học | Tốn 15–20 phút tự lật bài dò lại; mất 1–2 câu quiz do ghi thiếu điều kiện biên | **Cao** — Đầy đủ nguồn sự thật (`6 transcript` sạch có `[Txx-NNN]` + `2 slide PDF`) | **CHỌN** |
+| **2. Tóm tắt bài giảng tự động** | 100% người học có nhu cầu tóm tắt | Sau mỗi buổi học | Triệt tiêu tư duy học chủ động; học viên lười ghi chép, tụt mức nhận thức từ Constructive xuống Passive | Trung bình | **LOẠI** |
 | **3. Tối ưu Tutor: Trả lời có căn cứ** | 3.778 / 13.494 lượt thiếu trích dẫn (28.0%) | Lúc gặp thắc mắc | Tốn 5–10 phút tra lại slide; học viên không hỏi thì không được hỗ trợ | Trung bình — Nhiều nhóm khoá trước đã làm, lối mòn | **LOẠI** |
 | **4. Bản đồ ôn tập cá nhân (Learning Trace)** | ~30% học viên có thói quen chat nhiều | Cuối tuần ôn thi | Mất 30–45 phút tổng hợp; không biết bắt đầu ôn từ đâu | Thấp — Cần tích lũy lịch sử tương tác lớn, phạm vi quá rộng | **LOẠI** |
 
@@ -201,15 +201,14 @@ Bộ golden set gồm **20 cases** (`eval/golden_set.json`), trong đó có **11
 | Họ và Tên | Mã Học Viên | Vai trò chính | Phần việc đảm nhiệm trong dự án |
 |---|:---:|---|---|
 | **Phan Duy Thành** | 2A202602930 | **Đội trưởng · Product Lead** | Soạn thảo Canvas, hoàn thiện AI Spec (§1-§9), thiết kế System Prompt và JSON Schema hợp đồng output. |
-| **Phạm Thị Ngọc Anh** | 2A202602831 | **Evidence & Data Lead** | Khảo sát 22 học viên theo The Mom Test, khai phá 13.494 lượt chatlog VLearn, xây dựng bộ Golden Set 20 cases. |
+| **Phạm Thị Ngọc Anh** | 2A202602831 | **Evidence & Data Lead** | Phỏng vấn sâu học viên thật theo The Mom Test, khai phá 13.494 lượt chatlog VLearn, xây dựng bộ Golden Set 20 cases. |
 | **Võ Đức Tài** | 2A202603007 | **Backend & AI Prototype** | Xây dựng API Flask, kết nối OpenAI/Gemini SDK, viết thuật toán trích xuất PDF/transcript và module hậu kiểm trích dẫn `validate_and_ground`. |
-| **Đỗ Đình Long** | 2A202602673 | **UI & User Validation** | Thiết kế giao diện VLearn panel, hiện thực hóa 4 đường trải nghiệm UX, tiến hành kiểm thử với 3 willing users, lập báo cáo validation. |
+| **Đỗ Đình Long** | 2A202602673 | **UI & User Validation** | Thiết kế giao diện VLearn panel, hiện thực hóa 4 đường trải nghiệm UX, tiến hành kiểm thử với 2 willing users ngoài nhóm, lập báo cáo validation. |
 
 ### 8.2 Willing Users & Kế hoạch Vòng Validation (Ăn trọn +8 điểm Bonus R6)
-- **Danh sách 3 Willing Users ngoài nhóm (đã đồng ý thử nghiệm):**
-  1. *Nguyễn Văn An* (Mã HV: 2A202602711 · Lớp K4-3B)
-  2. *Trần Thị Bình* (Mã HV: 2A202602745 · Lớp K4-3B)
-  3. *Lê Hoàng Cường* (Mã HV: 2A202602789 · Lớp K4-3B)
+- **Danh sách 2 Willing Users ngoài nhóm (đã đồng ý thử nghiệm):**
+  1. *Phạm Thanh Sơn* (Mã HV: 2A202602794 · Lớp K4-3B)
+  2. *Trần Hoàng Duy Anh* (Mã HV: 2A202602558 · Lớp K4-3B)
 - **Kế hoạch kiểm thử:** Thực hiện tại phòng E403 vào 21:30 18/9 theo kịch bản 5 bước (Stanford CS177 & Mom Test), ghi nhận log hành vi và câu hỏi Disappointment (Sean Ellis), cập nhật kết quả vào thư mục `validation/`.
 
 ### 8.3 Multi-prototype: Quyết định thiết kế có tên
@@ -228,5 +227,5 @@ Bộ golden set gồm **20 cases** (`eval/golden_set.json`), trong đó có **11
 | **17/9 — 19:30 (CP1)** | Khởi tạo Canvas 7 dòng và khung AI Spec | Chốt đề tài Track A (Ghi chú thông minh), xác định job executor và pain point ban đầu. |
 | **17/9 — 21:00 (CP2)** | Hoàn thiện luồng giao diện bấm được (Mock prototype) | Thêm thanh điều hướng slide, iframe viewer và panel ghi chú bên phải. |
 | **18/9 — 16:00 (CP3)** | Tích hợp lời gọi AI thật + chạy thử nghiệm Lượt 1 Golden Set | Kết nối OpenAI API qua model `gpt-4.1-mini`, đo đạc 20 cases đạt 75.0%. |
-| **18/9 — 20:30 (CP4)** | Cập nhật hồ sơ bằng chứng A & B, khóa cứng Quality Bar $\ge 80\%$ | Bổ sung log khảo sát 22 học viên và khai phá 13.494 chatlog; tinh chỉnh System Prompt nâng tỷ lệ đạt lên 90.0%. |
-| **18/9 — 22:00 (CP5)** | Bổ sung nút "Đã biết rồi", thu gọn thẻ khi bấm "Bỏ qua" | Phản hồi từ phiên User Testing của Nguyễn Văn An và Trần Thị Bình (chi tiết tại `validation/user_feedback_log.md`). |
+| **18/9 — 20:30 (CP4)** | Cập nhật hồ sơ bằng chứng A & B, khóa cứng Quality Bar $\ge 80\%$ | Bổ sung log phỏng vấn sâu học viên thật và khai phá 13.494 chatlog; tinh chỉnh System Prompt nâng tỷ lệ đạt lên 95.0%. |
+| **18/9 — 22:00 (CP5)** | Bổ sung nút "Đã biết rồi", thu gọn thẻ khi bấm "Bỏ qua" | Phản hồi từ phiên User Testing của Phạm Thanh Sơn và Trần Hoàng Duy Anh (chi tiết tại `validation/user_feedback_log.md`). |

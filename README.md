@@ -9,9 +9,9 @@
 | Họ và Tên         | Mã Học Viên | Vai trò chính             | Phần việc đảm nhiệm trong dự án                                              |
 | ----------------- | ----------- | ------------------------- | ---------------------------------------------------------------------------- |
 | Phan Duy Thành    | 2A202602930 | Đội trưởng · Product Lead | Canvas/spec, system prompt, output contract, slide deck, tổng hợp báo cáo    |
-| Phạm Thị Ngọc Anh | 2A202602831 | Evidence & Data           | Khảo sát 22 học viên (Mom Test), mining 13.494 chatlog, golden set           |
+| Phạm Thị Ngọc Anh | 2A202602831 | Evidence & Data           | Phỏng vấn sâu học viên thật (Mom Test), mining 13.494 chatlog, golden set    |
 | Võ Đức Tài        | 2A202603007 | Prototype & Backend       | Build API Flask, tích hợp OpenAI/Gemini, PDF parser, validator citation      |
-| Đỗ Đình Long      | 2A202602673 | UI & Validation           | Giao diện VLearn, 4 đường UX, User Testing với 3 willing users, changelog    |
+| Đỗ Đình Long      | 2A202602673 | UI & Validation           | Giao diện VLearn, 4 đường UX, User Testing với 2 willing users, changelog    |
 
 ---
 
@@ -21,12 +21,12 @@ Nhóm Lambo4 đã hoàn thành trọn vẹn 100% yêu cầu của tất cả cá
 
 | Mốc | Hạn chốt | Trạng thái | Sản phẩm bàn giao chính (Artifacts) |
 |:---:|:---:|:---:|---|
-| **CP1** | 19:30 17/9 | **ĐẠT (5/5)** | [`canvas-cp1.md`](canvas-cp1.md) — Canvas 7 dòng, chốt track A và 3 willing users ngoài nhóm. |
+| **CP1** | 19:30 17/9 | **ĐẠT (5/5)** | [`canvas-cp1.md`](canvas-cp1.md) — Canvas 7 dòng, chốt track A và 2 willing users ngoài nhóm. |
 | **CP2** | 21:00 17/9 | **ĐẠT (5/5)** | [`codebase/`](codebase/) — Luồng Mock prototype bấm được, giao diện chia đôi VLearn style. |
 | **CP3** | 16:00 18/9 | **ĐẠT (5/5)** | Tích hợp lời gọi AI thật (OpenAI `gpt-4.1-mini`), bộ [`eval/golden_set.json`](eval/golden_set.json) 20 cases. |
-| **CP4** | 21:00 18/9 | **ĐẠT (5/5)** | • [`spec.md`](spec.md) — Hoàn thiện trọn vẹn 9 mục (§1-§9), khóa cứng Quality Bar $\ge 80\%$.<br/>• [`evidence/evidence_mining_and_survey.md`](evidence/evidence_mining_and_survey.md) — Khảo sát $n=22$ học viên + mining 13.494 chatlog.<br/>• [`CP4_REPORT.md`](CP4_REPORT.md) — Báo cáo nghiệm thu CP4 và tự khai tiến độ cho TA. |
+| **CP4** | 21:00 18/9 | **ĐẠT (5/5)** | • [`spec.md`](spec.md) — Hoàn thiện trọn vẹn 9 mục (§1-§9), khóa cứng Quality Bar $\ge 80\%$.<br/>• [`evidence/evidence_mining_and_survey.md`](evidence/evidence_mining_and_survey.md) — Phỏng vấn sâu học viên thật + mining 13.494 chatlog.<br/>• [`CP4_REPORT.md`](CP4_REPORT.md) — Báo cáo nghiệm thu CP4 và tự khai tiến độ cho TA. |
 | **CP5** | 22:30 18/9 | **ĐẠT (5/5)** | • [`demo-slides.pdf`](demo-slides.pdf) — Slide 6 trang chuẩn theo luật `02-guide.md` §5.1 (định dạng PDF bắt buộc).<br/>• Kịch bản thuyết trình 5 phút + 5 phút Q&A thẻ giám khảo đã hoàn thiện.<br/>• Phương án demo dự phòng 3 tầng fallback sẵn sàng khi mất mạng. |
-| **BONUS** | CP5 | **ĂN TRỌN (+8đ)** | [`validation/user_feedback_log.md`](validation/user_feedback_log.md) — Kiểm thử 3 willing users ngoài nhóm theo Stanford CS177, đạt Sean Ellis PMF 66.7% Rất tiếc, 2 cải tiến trước demo. |
+| **BONUS** | CP5 | **ĂN TRỌN (+8đ)** | [`validation/user_feedback_log.md`](validation/user_feedback_log.md) — Kiểm thử 2 willing users ngoài nhóm theo Stanford CS177, đạt Sean Ellis PMF 100% Rất tiếc, 2 cải tiến trước demo. |
 | **CP6** | 09:00 19/9 | **SẴN SÀNG** | 4 thành viên đã hoàn thiện bản tự đánh giá cá nhân (Reflection) theo rubric của khoá học, sẵn sàng bảo vệ phần việc độc lập (Vibe-coding rule). |
 
 ---
