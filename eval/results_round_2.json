@@ -1,9 +1,9 @@
 {
-  "round": 1,
+  "round": 2,
   "status": "completed",
   "provider": "openai",
   "model": "gpt-4.1-mini",
-  "run_at": "2026-09-18T11:40:04.055189+00:00",
+  "run_at": "2026-09-18T11:41:47.846652+00:00",
   "quality_bar": {
     "minimum_case_pass_rate": 0.8,
     "citation_validity": 1.0,
@@ -11,11 +11,11 @@
     "judgmental_language_allowed": 0
   },
   "summary": {
-    "passed": 15,
+    "passed": 19,
     "total": 20,
-    "pass_rate": 0.75,
+    "pass_rate": 0.95,
     "target_bar": 0.8,
-    "met_quality_bar": false,
+    "met_quality_bar": true,
     "valid_citations_rate": 1.0,
     "fabricated_citations": 0,
     "judgmental_language_instances": 0
@@ -39,10 +39,10 @@
       ],
       "caught_hallucinations": 0,
       "passed": true,
-      "latency_sec": 6.26,
-      "review_question": "Token là đơn vị văn bản như thế nào trong mô hình?",
+      "latency_sec": 3.72,
+      "review_question": "Token là đơn vị gì mà mô hình xử lý?",
       "suggested_revision": "",
-      "explanation": "Nguồn xác nhận nguyên văn rằng token là đơn vị văn bản mà mô hình xử lý, phù hợp hoàn toàn với nhận định trong note."
+      "explanation": "Nguồn xác nhận chính xác rằng token là đơn vị văn bản mà mô hình xử lý."
     },
     {
       "id": "GS-002",
@@ -62,10 +62,10 @@
       ],
       "caught_hallucinations": 0,
       "passed": true,
-      "latency_sec": 4.11,
-      "review_question": "Context window giới hạn lượng thông tin mô hình có thể xử lý trong một lần gọi như thế nào?",
+      "latency_sec": 2.44,
+      "review_question": "Context window giới hạn lượng thông tin mô hình như thế nào trong một lần gọi?",
       "suggested_revision": "",
-      "explanation": "Nguồn xác nhận rằng context window đặt giới hạn lượng thông tin mô hình có thể xét trong một lần gọi, tương đương với việc giới hạn lượng thông tin mô hình có thể xem trong một lượt."
+      "explanation": "Nguồn xác nhận rằng context window đặt giới hạn lượng thông tin mô hình có thể xét trong một lần gọi, tương đương với việc giới hạn lượng thông tin model có thể xem trong một lượt."
     },
     {
       "id": "GS-003",
@@ -85,8 +85,8 @@
       ],
       "caught_hallucinations": 0,
       "passed": true,
-      "latency_sec": 4.43,
-      "review_question": "Prompt dài hơn ảnh hưởng thế nào đến số token đầu vào?",
+      "latency_sec": 3.35,
+      "review_question": "Prompt dài hơn ảnh hưởng như thế nào đến số token đầu vào?",
       "suggested_revision": "",
       "explanation": "Nguồn xác nhận rằng số token đầu vào tăng khi nội dung prompt dài hơn, phù hợp với nhận định trong note."
     },
@@ -108,18 +108,18 @@
       ],
       "caught_hallucinations": 0,
       "passed": true,
-      "latency_sec": 4.25,
-      "review_question": "Streaming giúp người dùng nhận phản hồi như thế nào so với việc chờ toàn bộ kết quả?",
+      "latency_sec": 2.65,
+      "review_question": "Streaming giúp người dùng nhận phản hồi như thế nào?",
       "suggested_revision": "",
-      "explanation": "NOTE diễn đạt đúng bản chất của streaming là gửi phản hồi từng phần để người dùng không phải chờ toàn bộ kết quả, phù hợp với nội dung slide."
+      "explanation": "NOTE và SOURCE đều nêu rõ streaming giúp người dùng nhận phản hồi từng phần, không phải chờ toàn bộ kết quả, ý nghĩa tương đương và không mâu thuẫn."
     },
     {
       "id": "GS-005",
       "category": "normal",
       "notes": "API key cần được giữ bí mật và không đưa vào mã nguồn.",
       "expected_status": "correct_complete",
-      "actual_status": "missing_boundary",
-      "status_match": false,
+      "actual_status": "correct_complete",
+      "status_match": true,
       "citation_required": false,
       "citation_provided": true,
       "citations": [
@@ -130,11 +130,11 @@
         }
       ],
       "caught_hallucinations": 0,
-      "passed": false,
-      "latency_sec": 3.31,
-      "review_question": "Bạn có biết cách nào để sử dụng API key mà không đưa trực tiếp vào mã nguồn không?",
-      "suggested_revision": "API key cần được giữ bí mật, không đưa vào mã nguồn và nên đọc key từ biến môi trường để tránh commit vào repository.",
-      "explanation": "Nguồn chỉ rõ \"Không commit API key vào repository; hãy đọc key từ biến môi trường.\" cho thấy không chỉ giữ bí mật mà còn cần có phương pháp cụ thể để tránh đưa key vào mã nguồn."
+      "passed": true,
+      "latency_sec": 2.37,
+      "review_question": "Tại sao không nên commit API key vào repository?",
+      "suggested_revision": "",
+      "explanation": "Nguồn khuyến cáo không commit API key vào repository và đọc key từ biến môi trường, tương đương với việc giữ bí mật và không đưa trực tiếp vào mã nguồn."
     },
     {
       "id": "GS-006",
@@ -154,10 +154,10 @@
       ],
       "caught_hallucinations": 0,
       "passed": true,
-      "latency_sec": 2.75,
+      "latency_sec": 2.98,
       "review_question": "Token có thể tương ứng với những đơn vị ngôn ngữ nào ngoài từ?",
-      "suggested_revision": "Token có thể là một phần của từ hoặc nhiều token có thể tạo thành một từ, không phải lúc nào token cũng tương ứng chính xác với một từ.",
-      "explanation": "Nguồn nêu rõ \"Một từ có thể được tách thành nhiều token; token không luôn tương ứng với một từ.\" Điều này mâu thuẫn trực tiếp với nhận định trong note."
+      "suggested_revision": "Token có thể tương ứng với một phần của từ hoặc nhiều token tạo thành một từ, không phải luôn tương ứng chính xác với một từ.",
+      "explanation": "Nguồn nêu rõ rằng một từ có thể được tách thành nhiều token và token không luôn tương ứng với một từ."
     },
     {
       "id": "GS-007",
@@ -177,10 +177,10 @@
       ],
       "caught_hallucinations": 0,
       "passed": true,
-      "latency_sec": 3.61,
+      "latency_sec": 2.68,
       "review_question": "Giới hạn context window của các model được xác định như thế nào?",
-      "suggested_revision": "Context window của mỗi model có một giới hạn xác định.",
-      "explanation": "Nguồn nêu rõ rằng mỗi model có một giới hạn context window xác định, tức là không phải model nào cũng có context window không giới hạn."
+      "suggested_revision": "Context window của mỗi model đều có giới hạn xác định.",
+      "explanation": "Nguồn nêu rõ rằng mỗi model có một giới hạn context window xác định, nghĩa là không phải model nào cũng có context window không giới hạn."
     },
     {
       "id": "GS-008",
@@ -200,10 +200,10 @@
       ],
       "caught_hallucinations": 0,
       "passed": true,
-      "latency_sec": 2.81,
-      "review_question": "Temperature thấp ảnh hưởng như thế nào đến tính đúng đắn của câu trả lời?",
+      "latency_sec": 3.15,
+      "review_question": "Temperature thấp ảnh hưởng thế nào đến tính đúng đắn của câu trả lời?",
       "suggested_revision": "Temperature bằng 0 làm đầu ra ổn định hơn nhưng không đảm bảo câu trả lời luôn đúng sự thật.",
-      "explanation": "Nguồn nói rõ rằng temperature thấp làm đầu ra ổn định hơn nhưng không đảm bảo tính đúng đắn, tức là không đảm bảo câu trả lời luôn đúng sự thật."
+      "explanation": "Nguồn nói rõ rằng \"Temperature thấp làm đầu ra ổn định hơn nhưng không đảm bảo tính đúng đắn.\", tức là dù temperature thấp (bao gồm 0) làm kết quả ổn định nhưng không đảm bảo đúng sự thật."
     },
     {
       "id": "GS-009",
@@ -223,10 +223,10 @@
       ],
       "caught_hallucinations": 0,
       "passed": true,
-      "latency_sec": 2.51,
-      "review_question": "Tại sao API key không nên được commit ngay cả khi repository là private?",
+      "latency_sec": 2.73,
+      "review_question": "Tại sao không nên commit API key ngay cả khi repository là private?",
       "suggested_revision": "Không nên commit API key dù repository có để private hay không.",
-      "explanation": "Nguồn rõ ràng nêu: \"Không commit API key, kể cả trong repository private.\" Điều này mâu thuẫn trực tiếp với nhận định trong note."
+      "explanation": "Nguồn rõ ràng nêu: \"Không commit API key, kể cả trong repository private.\" Điều này mâu thuẫn với nhận định trong note."
     },
     {
       "id": "GS-010",
@@ -246,10 +246,10 @@
       ],
       "caught_hallucinations": 0,
       "passed": true,
-      "latency_sec": 3.94,
-      "review_question": "Prompt dài có những giới hạn hoặc hệ quả nào khi bổ sung ngữ cảnh cho model?",
+      "latency_sec": 3.22,
+      "review_question": "Prompt dài có những giới hạn và hệ quả nào ngoài việc bổ sung ngữ cảnh?",
       "suggested_revision": "Prompt dài giúp model có thêm ngữ cảnh nhưng bị giới hạn bởi context window và làm tăng chi phí token.",
-      "explanation": "Nguồn nêu rõ prompt dài có thể bổ sung ngữ cảnh nhưng vẫn bị giới hạn bởi context window và làm tăng chi phí token, những điểm này không được đề cập trong note."
+      "explanation": "Nguồn nói rõ rằng prompt dài có thể bổ sung ngữ cảnh nhưng vẫn bị giới hạn bởi context window và làm tăng chi phí token, trong khi note chỉ nhấn mạnh việc bổ sung ngữ cảnh mà không đề cập đến các giới hạn và chi phí này."
     },
     {
       "id": "GS-011",
@@ -269,10 +269,10 @@
       ],
       "caught_hallucinations": 0,
       "passed": true,
-      "latency_sec": 3.16,
-      "review_question": "Streaming ảnh hưởng như thế nào đến thời gian người dùng thấy token đầu tiên và tổng thời gian phản hồi?",
-      "suggested_revision": "Streaming cải thiện trải nghiệm bằng cách giảm thời gian người dùng thấy token đầu tiên, nhưng không nhất thiết làm giảm tổng thời gian sinh phản hồi.",
-      "explanation": "Nguồn nêu rõ \"Streaming cải thiện thời gian người dùng thấy token đầu tiên, nhưng không nhất thiết làm giảm tổng thời gian sinh phản hồi.\" trong khi note chỉ nêu chung chung \"Streaming làm trải nghiệm nhanh hơn.\""
+      "latency_sec": 8.91,
+      "review_question": "Streaming ảnh hưởng như thế nào đến thời gian người dùng nhận thấy phản hồi và tổng thời gian sinh phản hồi?",
+      "suggested_revision": "Streaming cải thiện trải nghiệm bằng cách làm người dùng thấy token đầu tiên nhanh hơn, nhưng không nhất thiết làm giảm tổng thời gian sinh phản hồi.",
+      "explanation": "Nguồn chỉ ra rằng streaming cải thiện thời gian người dùng thấy token đầu tiên, tức là trải nghiệm ban đầu nhanh hơn, nhưng không nhất thiết làm giảm tổng thời gian sinh phản hồi. Nhận định trong note đúng một phần nhưng thiếu thông tin quan trọng về việc tổng thời gian phản hồi không giảm."
     },
     {
       "id": "GS-012",
@@ -292,10 +292,10 @@
       ],
       "caught_hallucinations": 0,
       "passed": true,
-      "latency_sec": 3.65,
-      "review_question": "Ứng dụng cần làm gì để đảm bảo output JSON từ model được sử dụng đúng cách?",
-      "suggested_revision": "Model có thể trả JSON theo yêu cầu, nhưng ứng dụng cần validate cấu trúc và xử lý lỗi output để đảm bảo tính chính xác.",
-      "explanation": "Nguồn nêu rõ: \"Model có thể được yêu cầu trả JSON, nhưng ứng dụng vẫn phải validate cấu trúc và xử lý output lỗi.\" Điều này là một giới hạn quan trọng khi sử dụng output JSON từ model."
+      "latency_sec": 3.22,
+      "review_question": "Ứng dụng cần làm gì sau khi nhận JSON từ model?",
+      "suggested_revision": "Model có thể trả JSON theo yêu cầu, nhưng ứng dụng vẫn phải validate cấu trúc và xử lý output lỗi.",
+      "explanation": "Nguồn nêu rõ rằng mặc dù model có thể trả JSON theo yêu cầu, ứng dụng vẫn phải thực hiện việc validate cấu trúc và xử lý các lỗi output, điều này không được đề cập trong note."
     },
     {
       "id": "GS-013",
@@ -315,18 +315,18 @@
       ],
       "caught_hallucinations": 0,
       "passed": true,
-      "latency_sec": 4.62,
-      "review_question": "System prompt có phải là hàng rào tuyệt đối để kiểm soát output không?",
+      "latency_sec": 3.51,
+      "review_question": "System prompt có phải là biện pháp kiểm soát tuyệt đối cho output không?",
       "suggested_revision": "Dùng system prompt để định hướng hành vi output nhưng không phải hàng rào tuyệt đối; output vẫn cần được hậu kiểm.",
-      "explanation": "Nguồn nêu rõ: \"System prompt định hướng hành vi nhưng không phải hàng rào tuyệt đối; output vẫn cần được hậu kiểm.\" Điều này cho thấy system prompt chỉ định hướng, không đảm bảo kiểm soát hoàn toàn output."
+      "explanation": "Nguồn nêu rõ system prompt định hướng hành vi nhưng không phải hàng rào tuyệt đối; output vẫn cần được hậu kiểm, trong khi note chỉ nói dùng system prompt để kiểm soát output mà không đề cập đến giới hạn và cần hậu kiểm."
     },
     {
       "id": "GS-014",
       "category": "insufficient",
       "notes": "Gemini luôn rẻ hơn mọi model OpenAI.",
       "expected_status": "insufficient_evidence",
-      "actual_status": "missing_boundary",
-      "status_match": false,
+      "actual_status": "insufficient_evidence",
+      "status_match": true,
       "citation_required": false,
       "citation_provided": true,
       "citations": [
@@ -337,11 +337,11 @@
         }
       ],
       "caught_hallucinations": 0,
-      "passed": false,
-      "latency_sec": 3.28,
-      "review_question": "Chi phí sử dụng một model phụ thuộc vào những yếu tố nào theo nguồn?",
-      "suggested_revision": "Chi phí sử dụng Gemini phụ thuộc vào model và số token sử dụng, tương tự như các model khác.",
-      "explanation": "Nguồn chỉ nêu rằng chi phí phụ thuộc vào model và số token sử dụng, không có thông tin nào khẳng định Gemini luôn rẻ hơn mọi model OpenAI."
+      "passed": true,
+      "latency_sec": 2.76,
+      "review_question": "Chi phí của Gemini so với các model OpenAI được xác định dựa trên những yếu tố nào?",
+      "suggested_revision": "",
+      "explanation": "Nguồn chỉ đề cập rằng chi phí phụ thuộc vào model và số token sử dụng, không có thông tin cụ thể nào về việc Gemini rẻ hơn mọi model OpenAI."
     },
     {
       "id": "GS-015",
@@ -361,18 +361,18 @@
       ],
       "caught_hallucinations": 0,
       "passed": true,
-      "latency_sec": 2.07,
-      "review_question": "Thời điểm huấn luyện model được đề cập ở đâu trong tài liệu?",
+      "latency_sec": 2.45,
+      "review_question": "Thời điểm nào model được huấn luyện theo tài liệu?",
       "suggested_revision": "",
-      "explanation": "Nguồn không cung cấp thông tin nào về thời điểm huấn luyện model."
+      "explanation": "Nguồn không cung cấp thông tin về thời điểm huấn luyện model, chỉ đề cập đến bài học giới thiệu cách gọi model qua API."
     },
     {
       "id": "GS-016",
       "category": "ambiguous_input",
       "notes": "Nó tốt hơn và nhanh hơn.",
       "expected_status": "insufficient_evidence",
-      "actual_status": "missing_boundary",
-      "status_match": false,
+      "actual_status": "insufficient_evidence",
+      "status_match": true,
       "citation_required": false,
       "citation_provided": true,
       "citations": [
@@ -383,19 +383,19 @@
         }
       ],
       "caught_hallucinations": 0,
-      "passed": false,
+      "passed": true,
       "latency_sec": 3.27,
-      "review_question": "Độ trễ của mô hình phụ thuộc vào những yếu tố nào theo nguồn?",
-      "suggested_revision": "Nó tốt hơn và nhanh hơn nhưng độ trễ còn phụ thuộc vào model, kích thước input và độ dài output.",
-      "explanation": "Nguồn chỉ rõ độ trễ phụ thuộc vào model, kích thước input và độ dài output, tức là tốc độ không chỉ đơn giản là 'tốt hơn và nhanh hơn' mà còn phụ thuộc vào các yếu tố cụ thể này."
+      "review_question": "Yếu tố nào ảnh hưởng đến độ trễ của model theo nguồn?",
+      "suggested_revision": "",
+      "explanation": "Nguồn chỉ đề cập rằng độ trễ phụ thuộc vào model, kích thước input và độ dài output, không có thông tin cụ thể nào về việc 'nó' là gì, hoặc so sánh về tốc độ và chất lượng."
     },
     {
       "id": "GS-017",
       "category": "short_input",
       "notes": "Token tốt.",
       "expected_status": "insufficient_evidence",
-      "actual_status": "missing_boundary",
-      "status_match": false,
+      "actual_status": "insufficient_evidence",
+      "status_match": true,
       "citation_required": false,
       "citation_provided": true,
       "citations": [
@@ -406,11 +406,11 @@
         }
       ],
       "caught_hallucinations": 0,
-      "passed": false,
-      "latency_sec": 2.67,
-      "review_question": "Token được dùng để làm gì trong mô hình?",
-      "suggested_revision": "Token là đơn vị đầu vào và đầu ra dùng để tính giới hạn và chi phí.",
-      "explanation": "Nguồn định nghĩa token là đơn vị đầu vào và đầu ra dùng để tính giới hạn và chi phí, điều này là cơ chế cốt lõi để hiểu về token nhưng nhận định không đề cập."
+      "passed": true,
+      "latency_sec": 2.7,
+      "review_question": "Token được dùng để làm gì trong hệ thống?",
+      "suggested_revision": "",
+      "explanation": "Nguồn chỉ nêu Token là đơn vị đầu vào và đầu ra dùng để tính giới hạn và chi phí, không đánh giá Token là tốt hay không."
     },
     {
       "id": "GS-018",
@@ -430,17 +430,17 @@
       ],
       "caught_hallucinations": 0,
       "passed": true,
-      "latency_sec": 3.7,
-      "review_question": "Nội dung chính của ghi chú này là gì và nó có đầy đủ các cơ chế hay điều kiện nào không?",
+      "latency_sec": 4.07,
+      "review_question": "Những thông tin cụ thể nào trong ghi chú của bạn liên quan đến định nghĩa token?",
       "suggested_revision": "",
-      "explanation": "Nguồn chỉ định nghĩa token là đơn vị văn bản mà mô hình xử lý, không có thông tin nào liên quan đến độ đầy đủ của ghi chú hay nội dung ghi chú cụ thể."
+      "explanation": "Nguồn chỉ định nghĩa token là đơn vị văn bản mà mô hình xử lý, trong khi nhận định không đề cập đến nội dung cụ thể nào để so sánh hoặc đánh giá."
     },
     {
       "id": "GS-019",
       "category": "source_conflict",
       "notes": "Giới hạn context là 8.000 token.",
       "expected_status": "insufficient_evidence",
-      "actual_status": "missing_boundary",
+      "actual_status": "correct_complete",
       "status_match": false,
       "citation_required": false,
       "citation_provided": true,
@@ -449,19 +449,14 @@
           "source_type": "transcript",
           "source_id": "T01-N019",
           "quote": "Model A có context window 8.000 token."
-        },
-        {
-          "source_type": "transcript",
-          "source_id": "T01-N020",
-          "quote": "Phiên bản Model A mới có context window 32.000 token."
         }
       ],
       "caught_hallucinations": 0,
       "passed": false,
-      "latency_sec": 3.49,
-      "review_question": "Có những phiên bản nào của Model A và giới hạn context window của chúng là bao nhiêu?",
-      "suggested_revision": "Giới hạn context của Model A là 8.000 token, tuy nhiên phiên bản mới của Model A có giới hạn context lên đến 32.000 token.",
-      "explanation": "Nguồn cho biết Model A có context window 8.000 token, nhưng cũng có phiên bản mới của Model A với context window 32.000 token, do đó nhận định chỉ nêu 8.000 token là chưa đầy đủ."
+      "latency_sec": 2.99,
+      "review_question": "Giới hạn context window của Model A là bao nhiêu token?",
+      "suggested_revision": "",
+      "explanation": "Nguồn [transcript | T01-N019] nêu rõ \"Model A có context window 8.000 token.\" Điều này hoàn toàn phù hợp với nhận định trong NOTE."
     },
     {
       "id": "GS-020",
@@ -481,10 +476,10 @@
       ],
       "caught_hallucinations": 0,
       "passed": true,
-      "latency_sec": 3.01,
-      "review_question": "Tại sao việc không đặt timeout có thể gây ra vấn đề cho API khi chờ model trả lời?",
-      "suggested_revision": "Ứng dụng cần đặt timeout và xử lý retry có giới hạn để tránh request treo vô thời hạn.",
-      "explanation": "Nguồn nêu rõ ứng dụng cần timeout và xử lý retry có giới hạn để tránh request treo vô thời hạn, tức là không nên để API chờ vô thời hạn mà không timeout."
+      "latency_sec": 2.61,
+      "review_question": "Tại sao cần thiết lập timeout và giới hạn retry khi gọi API?",
+      "suggested_revision": "Cần đặt timeout và xử lý retry có giới hạn để tránh request treo vô thời hạn khi chờ model trả lời.",
+      "explanation": "Nguồn nêu rõ rằng ứng dụng cần timeout và xử lý retry có giới hạn để tránh request treo vô thời hạn, tức là không nên để API chờ vô thời hạn mà không timeout."
     }
   ]
 }
