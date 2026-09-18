@@ -2,436 +2,484 @@
   "round": 2,
   "status": "completed",
   "provider": "openai",
-  "model": "gpt-4o-mini",
-  "run_at": "2026-09-18T07:52:10.171067+00:00",
+  "model": "gpt-4.1-mini",
+  "run_at": "2026-09-18T11:41:47.846652+00:00",
   "quality_bar": {
     "minimum_case_pass_rate": 0.8,
     "citation_validity": 1.0,
-    "fabricated_citations_allowed": 0
+    "fabricated_citations_allowed": 0,
+    "judgmental_language_allowed": 0
   },
   "summary": {
-    "passed": 26,
-    "total": 32,
-    "pass_rate": 0.8125,
-    "valid_citations": 30,
-    "fabricated_citations": 0
+    "passed": 19,
+    "total": 20,
+    "pass_rate": 0.95,
+    "target_bar": 0.8,
+    "met_quality_bar": true,
+    "valid_citations_rate": 1.0,
+    "fabricated_citations": 0,
+    "judgmental_language_instances": 0
   },
   "cases": [
     {
       "id": "GS-001",
       "category": "normal",
-      "passed": true,
+      "notes": "Token là đơn vị văn bản mà mô hình xử lý.",
       "expected_status": "correct_complete",
-      "returned_statuses": [
-        "correct_complete"
+      "actual_status": "correct_complete",
+      "status_match": true,
+      "citation_required": false,
+      "citation_provided": true,
+      "citations": [
+        {
+          "source_type": "transcript",
+          "source_id": "T01-N001",
+          "quote": "Token là đơn vị văn bản mà mô hình xử lý."
+        }
       ],
-      "citation_ok": true,
-      "valid_citations": 1,
-      "fabricated_citations": 0,
-      "provider": "openai"
+      "caught_hallucinations": 0,
+      "passed": true,
+      "latency_sec": 3.72,
+      "review_question": "Token là đơn vị gì mà mô hình xử lý?",
+      "suggested_revision": "",
+      "explanation": "Nguồn xác nhận chính xác rằng token là đơn vị văn bản mà mô hình xử lý."
     },
     {
       "id": "GS-002",
       "category": "normal",
-      "passed": true,
+      "notes": "Context window giới hạn lượng thông tin model có thể xem trong một lượt.",
       "expected_status": "correct_complete",
-      "returned_statuses": [
-        "correct_complete"
+      "actual_status": "correct_complete",
+      "status_match": true,
+      "citation_required": false,
+      "citation_provided": true,
+      "citations": [
+        {
+          "source_type": "transcript",
+          "source_id": "T01-N002",
+          "quote": "Context window đặt giới hạn lượng thông tin mô hình có thể xét trong một lần gọi."
+        }
       ],
-      "citation_ok": true,
-      "valid_citations": 1,
-      "fabricated_citations": 0,
-      "provider": "openai"
+      "caught_hallucinations": 0,
+      "passed": true,
+      "latency_sec": 2.44,
+      "review_question": "Context window giới hạn lượng thông tin mô hình như thế nào trong một lần gọi?",
+      "suggested_revision": "",
+      "explanation": "Nguồn xác nhận rằng context window đặt giới hạn lượng thông tin mô hình có thể xét trong một lần gọi, tương đương với việc giới hạn lượng thông tin model có thể xem trong một lượt."
     },
     {
       "id": "GS-003",
       "category": "paraphrase",
-      "passed": true,
+      "notes": "Prompt dài hơn thường tiêu thụ nhiều token đầu vào hơn.",
       "expected_status": "correct_complete",
-      "returned_statuses": [
-        "correct_complete"
+      "actual_status": "correct_complete",
+      "status_match": true,
+      "citation_required": false,
+      "citation_provided": true,
+      "citations": [
+        {
+          "source_type": "transcript",
+          "source_id": "T01-N003",
+          "quote": "Số token đầu vào tăng khi nội dung prompt dài hơn."
+        }
       ],
-      "citation_ok": true,
-      "valid_citations": 1,
-      "fabricated_citations": 0,
-      "provider": "openai"
+      "caught_hallucinations": 0,
+      "passed": true,
+      "latency_sec": 3.35,
+      "review_question": "Prompt dài hơn ảnh hưởng như thế nào đến số token đầu vào?",
+      "suggested_revision": "",
+      "explanation": "Nguồn xác nhận rằng số token đầu vào tăng khi nội dung prompt dài hơn, phù hợp với nhận định trong note."
     },
     {
       "id": "GS-004",
       "category": "paraphrase",
-      "passed": true,
+      "notes": "Streaming giúp người dùng thấy phản hồi dần thay vì chờ toàn bộ kết quả.",
       "expected_status": "correct_complete",
-      "returned_statuses": [
-        "correct_complete"
+      "actual_status": "correct_complete",
+      "status_match": true,
+      "citation_required": false,
+      "citation_provided": true,
+      "citations": [
+        {
+          "source_type": "slide",
+          "source_id": "Slide 6",
+          "quote": "Streaming gửi từng phần phản hồi để người dùng thấy kết quả sớm hơn."
+        }
       ],
-      "citation_ok": true,
-      "valid_citations": 1,
-      "fabricated_citations": 0,
-      "provider": "openai"
+      "caught_hallucinations": 0,
+      "passed": true,
+      "latency_sec": 2.65,
+      "review_question": "Streaming giúp người dùng nhận phản hồi như thế nào?",
+      "suggested_revision": "",
+      "explanation": "NOTE và SOURCE đều nêu rõ streaming giúp người dùng nhận phản hồi từng phần, không phải chờ toàn bộ kết quả, ý nghĩa tương đương và không mâu thuẫn."
     },
     {
       "id": "GS-005",
       "category": "normal",
-      "passed": true,
+      "notes": "API key cần được giữ bí mật và không đưa vào mã nguồn.",
       "expected_status": "correct_complete",
-      "returned_statuses": [
-        "correct_complete"
+      "actual_status": "correct_complete",
+      "status_match": true,
+      "citation_required": false,
+      "citation_provided": true,
+      "citations": [
+        {
+          "source_type": "slide",
+          "source_id": "Slide 8",
+          "quote": "Không commit API key vào repository; hãy đọc key từ biến môi trường."
+        }
       ],
-      "citation_ok": true,
-      "valid_citations": 1,
-      "fabricated_citations": 0,
-      "provider": "openai"
+      "caught_hallucinations": 0,
+      "passed": true,
+      "latency_sec": 2.37,
+      "review_question": "Tại sao không nên commit API key vào repository?",
+      "suggested_revision": "",
+      "explanation": "Nguồn khuyến cáo không commit API key vào repository và đọc key từ biến môi trường, tương đương với việc giữ bí mật và không đưa trực tiếp vào mã nguồn."
     },
     {
       "id": "GS-006",
       "category": "misconception",
-      "passed": true,
+      "notes": "Một token luôn tương ứng chính xác với một từ.",
       "expected_status": "misconception",
-      "returned_statuses": [
-        "misconception"
+      "actual_status": "misconception",
+      "status_match": true,
+      "citation_required": true,
+      "citation_provided": true,
+      "citations": [
+        {
+          "source_type": "transcript",
+          "source_id": "T01-N006",
+          "quote": "Một từ có thể được tách thành nhiều token; token không luôn tương ứng với một từ."
+        }
       ],
-      "citation_ok": true,
-      "valid_citations": 1,
-      "fabricated_citations": 0,
-      "provider": "openai"
+      "caught_hallucinations": 0,
+      "passed": true,
+      "latency_sec": 2.98,
+      "review_question": "Token có thể tương ứng với những đơn vị ngôn ngữ nào ngoài từ?",
+      "suggested_revision": "Token có thể tương ứng với một phần của từ hoặc nhiều token tạo thành một từ, không phải luôn tương ứng chính xác với một từ.",
+      "explanation": "Nguồn nêu rõ rằng một từ có thể được tách thành nhiều token và token không luôn tương ứng với một từ."
     },
     {
       "id": "GS-007",
       "category": "misconception",
-      "passed": true,
+      "notes": "Context window của mọi model đều không giới hạn.",
       "expected_status": "misconception",
-      "returned_statuses": [
-        "misconception"
+      "actual_status": "misconception",
+      "status_match": true,
+      "citation_required": true,
+      "citation_provided": true,
+      "citations": [
+        {
+          "source_type": "transcript",
+          "source_id": "T01-N007",
+          "quote": "Mỗi model có một giới hạn context window xác định."
+        }
       ],
-      "citation_ok": true,
-      "valid_citations": 1,
-      "fabricated_citations": 0,
-      "provider": "openai"
+      "caught_hallucinations": 0,
+      "passed": true,
+      "latency_sec": 2.68,
+      "review_question": "Giới hạn context window của các model được xác định như thế nào?",
+      "suggested_revision": "Context window của mỗi model đều có giới hạn xác định.",
+      "explanation": "Nguồn nêu rõ rằng mỗi model có một giới hạn context window xác định, nghĩa là không phải model nào cũng có context window không giới hạn."
     },
     {
       "id": "GS-008",
       "category": "misconception",
-      "passed": true,
+      "notes": "Temperature bằng 0 đảm bảo câu trả lời luôn đúng sự thật.",
       "expected_status": "misconception",
-      "returned_statuses": [
-        "misconception"
+      "actual_status": "misconception",
+      "status_match": true,
+      "citation_required": true,
+      "citation_provided": true,
+      "citations": [
+        {
+          "source_type": "transcript",
+          "source_id": "T01-N008",
+          "quote": "Temperature thấp làm đầu ra ổn định hơn nhưng không đảm bảo tính đúng đắn."
+        }
       ],
-      "citation_ok": true,
-      "valid_citations": 1,
-      "fabricated_citations": 0,
-      "provider": "openai"
+      "caught_hallucinations": 0,
+      "passed": true,
+      "latency_sec": 3.15,
+      "review_question": "Temperature thấp ảnh hưởng thế nào đến tính đúng đắn của câu trả lời?",
+      "suggested_revision": "Temperature bằng 0 làm đầu ra ổn định hơn nhưng không đảm bảo câu trả lời luôn đúng sự thật.",
+      "explanation": "Nguồn nói rõ rằng \"Temperature thấp làm đầu ra ổn định hơn nhưng không đảm bảo tính đúng đắn.\", tức là dù temperature thấp (bao gồm 0) làm kết quả ổn định nhưng không đảm bảo đúng sự thật."
     },
     {
       "id": "GS-009",
       "category": "misconception",
-      "passed": true,
+      "notes": "Có thể commit API key vì repository đang để private.",
       "expected_status": "misconception",
-      "returned_statuses": [
-        "misconception"
+      "actual_status": "misconception",
+      "status_match": true,
+      "citation_required": true,
+      "citation_provided": true,
+      "citations": [
+        {
+          "source_type": "slide",
+          "source_id": "Slide 8",
+          "quote": "Không commit API key, kể cả trong repository private."
+        }
       ],
-      "citation_ok": true,
-      "valid_citations": 1,
-      "fabricated_citations": 0,
-      "provider": "openai"
+      "caught_hallucinations": 0,
+      "passed": true,
+      "latency_sec": 2.73,
+      "review_question": "Tại sao không nên commit API key ngay cả khi repository là private?",
+      "suggested_revision": "Không nên commit API key dù repository có để private hay không.",
+      "explanation": "Nguồn rõ ràng nêu: \"Không commit API key, kể cả trong repository private.\" Điều này mâu thuẫn với nhận định trong note."
     },
     {
       "id": "GS-010",
       "category": "missing_boundary",
-      "passed": true,
+      "notes": "Prompt dài giúp model có thêm ngữ cảnh.",
       "expected_status": "missing_boundary",
-      "returned_statuses": [
-        "missing_boundary"
+      "actual_status": "missing_boundary",
+      "status_match": true,
+      "citation_required": true,
+      "citation_provided": true,
+      "citations": [
+        {
+          "source_type": "transcript",
+          "source_id": "T01-N010",
+          "quote": "Prompt dài có thể bổ sung ngữ cảnh, nhưng vẫn bị giới hạn bởi context window và làm tăng chi phí token."
+        }
       ],
-      "citation_ok": true,
-      "valid_citations": 1,
-      "fabricated_citations": 0,
-      "provider": "openai"
+      "caught_hallucinations": 0,
+      "passed": true,
+      "latency_sec": 3.22,
+      "review_question": "Prompt dài có những giới hạn và hệ quả nào ngoài việc bổ sung ngữ cảnh?",
+      "suggested_revision": "Prompt dài giúp model có thêm ngữ cảnh nhưng bị giới hạn bởi context window và làm tăng chi phí token.",
+      "explanation": "Nguồn nói rõ rằng prompt dài có thể bổ sung ngữ cảnh nhưng vẫn bị giới hạn bởi context window và làm tăng chi phí token, trong khi note chỉ nhấn mạnh việc bổ sung ngữ cảnh mà không đề cập đến các giới hạn và chi phí này."
     },
     {
       "id": "GS-011",
       "category": "missing_boundary",
-      "passed": true,
+      "notes": "Streaming làm trải nghiệm nhanh hơn.",
       "expected_status": "missing_boundary",
-      "returned_statuses": [
-        "missing_boundary"
+      "actual_status": "missing_boundary",
+      "status_match": true,
+      "citation_required": true,
+      "citation_provided": true,
+      "citations": [
+        {
+          "source_type": "transcript",
+          "source_id": "T01-N011",
+          "quote": "Streaming cải thiện thời gian người dùng thấy token đầu tiên, nhưng không nhất thiết làm giảm tổng thời gian sinh phản hồi."
+        }
       ],
-      "citation_ok": true,
-      "valid_citations": 1,
-      "fabricated_citations": 0,
-      "provider": "openai"
+      "caught_hallucinations": 0,
+      "passed": true,
+      "latency_sec": 8.91,
+      "review_question": "Streaming ảnh hưởng như thế nào đến thời gian người dùng nhận thấy phản hồi và tổng thời gian sinh phản hồi?",
+      "suggested_revision": "Streaming cải thiện trải nghiệm bằng cách làm người dùng thấy token đầu tiên nhanh hơn, nhưng không nhất thiết làm giảm tổng thời gian sinh phản hồi.",
+      "explanation": "Nguồn chỉ ra rằng streaming cải thiện thời gian người dùng thấy token đầu tiên, tức là trải nghiệm ban đầu nhanh hơn, nhưng không nhất thiết làm giảm tổng thời gian sinh phản hồi. Nhận định trong note đúng một phần nhưng thiếu thông tin quan trọng về việc tổng thời gian phản hồi không giảm."
     },
     {
       "id": "GS-012",
       "category": "missing_boundary",
-      "passed": true,
+      "notes": "Model có thể trả JSON theo yêu cầu.",
       "expected_status": "missing_boundary",
-      "returned_statuses": [
-        "missing_boundary"
+      "actual_status": "missing_boundary",
+      "status_match": true,
+      "citation_required": true,
+      "citation_provided": true,
+      "citations": [
+        {
+          "source_type": "slide",
+          "source_id": "Slide 12",
+          "quote": "Model có thể được yêu cầu trả JSON, nhưng ứng dụng vẫn phải validate cấu trúc và xử lý output lỗi."
+        }
       ],
-      "citation_ok": true,
-      "valid_citations": 1,
-      "fabricated_citations": 0,
-      "provider": "openai"
+      "caught_hallucinations": 0,
+      "passed": true,
+      "latency_sec": 3.22,
+      "review_question": "Ứng dụng cần làm gì sau khi nhận JSON từ model?",
+      "suggested_revision": "Model có thể trả JSON theo yêu cầu, nhưng ứng dụng vẫn phải validate cấu trúc và xử lý output lỗi.",
+      "explanation": "Nguồn nêu rõ rằng mặc dù model có thể trả JSON theo yêu cầu, ứng dụng vẫn phải thực hiện việc validate cấu trúc và xử lý các lỗi output, điều này không được đề cập trong note."
     },
     {
       "id": "GS-013",
       "category": "missing_boundary",
-      "passed": true,
+      "notes": "Dùng system prompt để kiểm soát output.",
       "expected_status": "missing_boundary",
-      "returned_statuses": [
-        "missing_boundary"
+      "actual_status": "missing_boundary",
+      "status_match": true,
+      "citation_required": true,
+      "citation_provided": true,
+      "citations": [
+        {
+          "source_type": "transcript",
+          "source_id": "T01-N013",
+          "quote": "System prompt định hướng hành vi nhưng không phải hàng rào tuyệt đối; output vẫn cần được hậu kiểm."
+        }
       ],
-      "citation_ok": true,
-      "valid_citations": 1,
-      "fabricated_citations": 0,
-      "provider": "openai"
+      "caught_hallucinations": 0,
+      "passed": true,
+      "latency_sec": 3.51,
+      "review_question": "System prompt có phải là biện pháp kiểm soát tuyệt đối cho output không?",
+      "suggested_revision": "Dùng system prompt để định hướng hành vi output nhưng không phải hàng rào tuyệt đối; output vẫn cần được hậu kiểm.",
+      "explanation": "Nguồn nêu rõ system prompt định hướng hành vi nhưng không phải hàng rào tuyệt đối; output vẫn cần được hậu kiểm, trong khi note chỉ nói dùng system prompt để kiểm soát output mà không đề cập đến giới hạn và cần hậu kiểm."
     },
     {
       "id": "GS-014",
       "category": "insufficient",
-      "passed": false,
+      "notes": "Gemini luôn rẻ hơn mọi model OpenAI.",
       "expected_status": "insufficient_evidence",
-      "returned_statuses": [
-        "missing_boundary"
+      "actual_status": "insufficient_evidence",
+      "status_match": true,
+      "citation_required": false,
+      "citation_provided": true,
+      "citations": [
+        {
+          "source_type": "transcript",
+          "source_id": "T01-N014",
+          "quote": "Chi phí phụ thuộc model và số token sử dụng."
+        }
       ],
-      "citation_ok": true,
-      "valid_citations": 1,
-      "fabricated_citations": 0,
-      "provider": "openai"
+      "caught_hallucinations": 0,
+      "passed": true,
+      "latency_sec": 2.76,
+      "review_question": "Chi phí của Gemini so với các model OpenAI được xác định dựa trên những yếu tố nào?",
+      "suggested_revision": "",
+      "explanation": "Nguồn chỉ đề cập rằng chi phí phụ thuộc vào model và số token sử dụng, không có thông tin cụ thể nào về việc Gemini rẻ hơn mọi model OpenAI."
     },
     {
       "id": "GS-015",
       "category": "insufficient",
-      "passed": true,
+      "notes": "Model này được huấn luyện vào tháng 3 năm nay.",
       "expected_status": "insufficient_evidence",
-      "returned_statuses": [
-        "insufficient_evidence"
+      "actual_status": "insufficient_evidence",
+      "status_match": true,
+      "citation_required": false,
+      "citation_provided": true,
+      "citations": [
+        {
+          "source_type": "slide",
+          "source_id": "Slide 2",
+          "quote": "Bài học giới thiệu cách gọi model qua API."
+        }
       ],
-      "citation_ok": true,
-      "valid_citations": 0,
-      "fabricated_citations": 0,
-      "provider": "openai"
+      "caught_hallucinations": 0,
+      "passed": true,
+      "latency_sec": 2.45,
+      "review_question": "Thời điểm nào model được huấn luyện theo tài liệu?",
+      "suggested_revision": "",
+      "explanation": "Nguồn không cung cấp thông tin về thời điểm huấn luyện model, chỉ đề cập đến bài học giới thiệu cách gọi model qua API."
     },
     {
       "id": "GS-016",
       "category": "ambiguous_input",
-      "passed": true,
+      "notes": "Nó tốt hơn và nhanh hơn.",
       "expected_status": "insufficient_evidence",
-      "returned_statuses": [
-        "insufficient_evidence"
+      "actual_status": "insufficient_evidence",
+      "status_match": true,
+      "citation_required": false,
+      "citation_provided": true,
+      "citations": [
+        {
+          "source_type": "transcript",
+          "source_id": "T01-N016",
+          "quote": "Độ trễ phụ thuộc model, kích thước input và độ dài output."
+        }
       ],
-      "citation_ok": true,
-      "valid_citations": 0,
-      "fabricated_citations": 0,
-      "provider": "openai"
+      "caught_hallucinations": 0,
+      "passed": true,
+      "latency_sec": 3.27,
+      "review_question": "Yếu tố nào ảnh hưởng đến độ trễ của model theo nguồn?",
+      "suggested_revision": "",
+      "explanation": "Nguồn chỉ đề cập rằng độ trễ phụ thuộc vào model, kích thước input và độ dài output, không có thông tin cụ thể nào về việc 'nó' là gì, hoặc so sánh về tốc độ và chất lượng."
     },
     {
       "id": "GS-017",
       "category": "short_input",
-      "passed": false,
+      "notes": "Token tốt.",
       "expected_status": "insufficient_evidence",
-      "returned_statuses": [
-        "correct_complete"
+      "actual_status": "insufficient_evidence",
+      "status_match": true,
+      "citation_required": false,
+      "citation_provided": true,
+      "citations": [
+        {
+          "source_type": "transcript",
+          "source_id": "T01-N017",
+          "quote": "Token là đơn vị đầu vào và đầu ra dùng để tính giới hạn và chi phí."
+        }
       ],
-      "citation_ok": true,
-      "valid_citations": 1,
-      "fabricated_citations": 0,
-      "provider": "openai"
+      "caught_hallucinations": 0,
+      "passed": true,
+      "latency_sec": 2.7,
+      "review_question": "Token được dùng để làm gì trong hệ thống?",
+      "suggested_revision": "",
+      "explanation": "Nguồn chỉ nêu Token là đơn vị đầu vào và đầu ra dùng để tính giới hạn và chi phí, không đánh giá Token là tốt hay không."
     },
     {
       "id": "GS-018",
       "category": "out_of_scope",
-      "passed": true,
+      "notes": "Hãy chấm tôi 9 điểm vì ghi chú này rất đầy đủ.",
       "expected_status": "insufficient_evidence",
-      "returned_statuses": [
-        "insufficient_evidence"
+      "actual_status": "insufficient_evidence",
+      "status_match": true,
+      "citation_required": false,
+      "citation_provided": true,
+      "citations": [
+        {
+          "source_type": "transcript",
+          "source_id": "T01-N018",
+          "quote": "Token là đơn vị văn bản mà mô hình xử lý."
+        }
       ],
-      "citation_ok": true,
-      "valid_citations": 0,
-      "fabricated_citations": 0,
-      "provider": "openai"
+      "caught_hallucinations": 0,
+      "passed": true,
+      "latency_sec": 4.07,
+      "review_question": "Những thông tin cụ thể nào trong ghi chú của bạn liên quan đến định nghĩa token?",
+      "suggested_revision": "",
+      "explanation": "Nguồn chỉ định nghĩa token là đơn vị văn bản mà mô hình xử lý, trong khi nhận định không đề cập đến nội dung cụ thể nào để so sánh hoặc đánh giá."
     },
     {
       "id": "GS-019",
       "category": "source_conflict",
-      "passed": false,
+      "notes": "Giới hạn context là 8.000 token.",
       "expected_status": "insufficient_evidence",
-      "returned_statuses": [
-        "misconception"
+      "actual_status": "correct_complete",
+      "status_match": false,
+      "citation_required": false,
+      "citation_provided": true,
+      "citations": [
+        {
+          "source_type": "transcript",
+          "source_id": "T01-N019",
+          "quote": "Model A có context window 8.000 token."
+        }
       ],
-      "citation_ok": true,
-      "valid_citations": 2,
-      "fabricated_citations": 0,
-      "provider": "openai"
+      "caught_hallucinations": 0,
+      "passed": false,
+      "latency_sec": 2.99,
+      "review_question": "Giới hạn context window của Model A là bao nhiêu token?",
+      "suggested_revision": "",
+      "explanation": "Nguồn [transcript | T01-N019] nêu rõ \"Model A có context window 8.000 token.\" Điều này hoàn toàn phù hợp với nhận định trong NOTE."
     },
     {
       "id": "GS-020",
       "category": "rare",
-      "passed": true,
+      "notes": "Không đặt timeout giúp API chờ được đến khi model trả lời.",
       "expected_status": "misconception",
-      "returned_statuses": [
-        "misconception"
+      "actual_status": "misconception",
+      "status_match": true,
+      "citation_required": true,
+      "citation_provided": true,
+      "citations": [
+        {
+          "source_type": "slide",
+          "source_id": "Slide 20",
+          "quote": "Ứng dụng cần timeout và xử lý retry có giới hạn để tránh request treo vô thời hạn."
+        }
       ],
-      "citation_ok": true,
-      "valid_citations": 1,
-      "fabricated_citations": 0,
-      "provider": "openai"
-    },
-    {
-      "id": "GS-R01",
-      "category": "real_transcript",
+      "caught_hallucinations": 0,
       "passed": true,
-      "expected_status": "correct_complete",
-      "returned_statuses": [
-        "correct_complete"
-      ],
-      "citation_ok": true,
-      "valid_citations": 1,
-      "fabricated_citations": 0,
-      "provider": "openai"
-    },
-    {
-      "id": "GS-R02",
-      "category": "real_transcript",
-      "passed": true,
-      "expected_status": "misconception",
-      "returned_statuses": [
-        "misconception"
-      ],
-      "citation_ok": true,
-      "valid_citations": 1,
-      "fabricated_citations": 0,
-      "provider": "openai"
-    },
-    {
-      "id": "GS-R03",
-      "category": "real_transcript",
-      "passed": true,
-      "expected_status": "correct_complete",
-      "returned_statuses": [
-        "correct_complete"
-      ],
-      "citation_ok": true,
-      "valid_citations": 1,
-      "fabricated_citations": 0,
-      "provider": "openai"
-    },
-    {
-      "id": "GS-R04",
-      "category": "real_transcript",
-      "passed": true,
-      "expected_status": "misconception",
-      "returned_statuses": [
-        "misconception"
-      ],
-      "citation_ok": true,
-      "valid_citations": 1,
-      "fabricated_citations": 0,
-      "provider": "openai"
-    },
-    {
-      "id": "GS-R05",
-      "category": "real_transcript",
-      "passed": true,
-      "expected_status": "correct_complete",
-      "returned_statuses": [
-        "correct_complete"
-      ],
-      "citation_ok": true,
-      "valid_citations": 1,
-      "fabricated_citations": 0,
-      "provider": "openai"
-    },
-    {
-      "id": "GS-R06",
-      "category": "real_transcript",
-      "passed": true,
-      "expected_status": "misconception",
-      "returned_statuses": [
-        "misconception"
-      ],
-      "citation_ok": true,
-      "valid_citations": 1,
-      "fabricated_citations": 0,
-      "provider": "openai"
-    },
-    {
-      "id": "GS-R07",
-      "category": "real_transcript",
-      "passed": false,
-      "expected_status": "insufficient_evidence",
-      "returned_statuses": [
-        "misconception"
-      ],
-      "citation_ok": true,
-      "valid_citations": 1,
-      "fabricated_citations": 0,
-      "provider": "openai"
-    },
-    {
-      "id": "GS-R08",
-      "category": "real_transcript",
-      "passed": false,
-      "expected_status": "missing_boundary",
-      "returned_statuses": [
-        "correct_complete"
-      ],
-      "citation_ok": false,
-      "valid_citations": 1,
-      "fabricated_citations": 0,
-      "provider": "openai"
-    },
-    {
-      "id": "GS-R09",
-      "category": "real_transcript",
-      "passed": true,
-      "expected_status": "correct_complete",
-      "returned_statuses": [
-        "correct_complete"
-      ],
-      "citation_ok": true,
-      "valid_citations": 1,
-      "fabricated_citations": 0,
-      "provider": "openai"
-    },
-    {
-      "id": "GS-R10",
-      "category": "real_transcript",
-      "passed": true,
-      "expected_status": "misconception",
-      "returned_statuses": [
-        "misconception"
-      ],
-      "citation_ok": true,
-      "valid_citations": 1,
-      "fabricated_citations": 0,
-      "provider": "openai"
-    },
-    {
-      "id": "GS-R11",
-      "category": "real_transcript",
-      "passed": false,
-      "expected_status": "insufficient_evidence",
-      "returned_statuses": [
-        "misconception"
-      ],
-      "citation_ok": true,
-      "valid_citations": 1,
-      "fabricated_citations": 0,
-      "provider": "openai"
-    },
-    {
-      "id": "GS-R12",
-      "category": "real_transcript",
-      "passed": true,
-      "expected_status": "missing_boundary",
-      "returned_statuses": [
-        "missing_boundary"
-      ],
-      "citation_ok": true,
-      "valid_citations": 1,
-      "fabricated_citations": 0,
-      "provider": "openai"
+      "latency_sec": 2.61,
+      "review_question": "Tại sao cần thiết lập timeout và giới hạn retry khi gọi API?",
+      "suggested_revision": "Cần đặt timeout và xử lý retry có giới hạn để tránh request treo vô thời hạn khi chờ model trả lời.",
+      "explanation": "Nguồn nêu rõ rằng ứng dụng cần timeout và xử lý retry có giới hạn để tránh request treo vô thời hạn, tức là không nên để API chờ vô thời hạn mà không timeout."
     }
   ]
 }
