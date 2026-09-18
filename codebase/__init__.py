@@ -1,0 +1,2 @@
+"""AI Note Reviewer prototype."""
+
