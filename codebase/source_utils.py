@@ -12,7 +12,7 @@ class SourceChunk:
     text: str
 
 
-TRANSCRIPT_ID = re.compile(r"\[(T\d{2}-N\d{3})\]")
+TRANSCRIPT_ID = re.compile(r"\[(T\d{2}-(?:N)?\d{3})\]")
 SLIDE_ID = re.compile(r"(?:^|\n)\s*(?:#{1,3}\s*)?Slide\s+(\d+)\b", re.IGNORECASE)
 
 
@@ -65,4 +65,3 @@ def validate_and_ground(findings: list[Finding], chunks: list[SourceChunk]) -> l
             finding.confidence = "low"
         grounded.append(finding)
     return grounded
-

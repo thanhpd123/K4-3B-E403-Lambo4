@@ -7,7 +7,8 @@ AI chỉ đưa ra nhận xét và bản sửa nháp. Nội dung ghi chú chỉ t
 ## 1. Tính năng
 
 - Nhập ghi chú cá nhân theo slide.
-- Dán transcript/slide hoặc tải file `.txt`, `.md`, `.pdf`.
+- Tự động nạp hai bộ slide PDF và transcript tương ứng từ `build/data/vlearn-pack/`.
+- Chuyển bài và chuyển slide bằng nút trước/sau hoặc nhập số trang.
 - Phân loại phát hiện thành:
   - `correct_complete`: đúng và đủ.
   - `misconception`: nội dung sai hoặc mâu thuẫn với nguồn.
@@ -148,10 +149,10 @@ Sau đó mở `http://127.0.0.1:5000`.
 
 ## 5. Cách sử dụng
 
-1. Viết ghi chú vào ô **Ghi chú cá nhân**.
-2. Chọn loại nguồn `Transcript` hoặc `Slide`.
-3. Dán nội dung nguồn hoặc tải file `.txt`, `.md`, `.pdf`.
-4. Bấm **Review notes**.
+1. Chọn bài Day 1 hoặc Day 2 ở thanh bên trái.
+2. Dùng nút `‹` / `›` hoặc nhập số để mở slide cần học.
+3. Viết ghi chú vào ô **Ghi chú cá nhân**. Mỗi slide có vùng ghi chú riêng trong phiên trình duyệt.
+4. Bấm **Review notes**. Nguồn slide và transcript đúng bài được nạp tự động.
 5. Đợi AI đối chiếu từng nhận định với nguồn.
 6. Mở citation để kiểm tra đoạn nguồn.
 7. Chọn hành động phù hợp:
@@ -173,7 +174,8 @@ K4-3B-E403-Lambo4/
 ├── codebase/
 │   ├── __init__.py
 │   ├── README.md                # Tài liệu này
-│   ├── app.py                   # Flask app, route, upload và error handling
+│   ├── app.py                   # Flask app, route, phục vụ slide và error handling
+│   ├── lesson_data.py           # Mapping slide/transcript và truy xuất context
 │   ├── ai_client.py             # Gemini/OpenAI client và chọn provider
 │   ├── mock_ai.py               # Mock tường minh chỉ dùng test UI
 │   ├── prompt.py                # System prompt và user prompt
@@ -198,14 +200,15 @@ K4-3B-E403-Lambo4/
 ```text
 Học viên nhập ghi chú
         │
-        ├── Dán nguồn hoặc tải TXT/MD/PDF
+        ├── Chọn bài và slide đang học
         │
         ▼
 Flask nhận POST /api/review
         │
-        ├── Pydantic kiểm tra độ dài và source_type
-        ├── PDF được trích xuất thành text theo từng trang
-        └── Transcript/slide được chia thành SourceChunk có source_id
+        ├── Pydantic kiểm tra ghi chú, lesson_id và slide_number
+        ├── Trang PDF hiện tại được trích xuất thành text
+        ├── Transcript đúng bài được chia thành SourceChunk có source_id
+        └── Chọn các đoạn transcript liên quan nhất với slide + ghi chú
         │
         ▼
 Chọn AI provider
@@ -291,6 +294,15 @@ Response của API:
 - Log chỉ ghi provider, độ dài ghi chú, số source chunks và số findings.
 
 ## 10. Cách nguồn được xử lý
+
+Nguồn được ánh xạ tự động:
+
+| Bài trong giao diện | Slide | Transcript |
+|---|---|---|
+| Day 1 - AI & LLM Foundation | `d1-slide-hackathon.pdf` | `transcript-04-clean.md`, `transcript-06-clean.md` |
+| Day 2 - Xác định bài toán cho AI | `d2-slide-hackathon.pdf` | `transcript-01/02/03/05-clean.md` |
+
+Khi review, backend dùng text của đúng trang PDF đang mở và tối đa 8 đoạn transcript có độ trùng khớp từ khóa cao nhất. Cách này giảm context thừa và đảm bảo không trộn transcript giữa hai bài.
 
 ### Transcript
 
@@ -404,11 +416,8 @@ Request dùng `multipart/form-data`:
 | Trường | Bắt buộc | Nội dung |
 |---|---:|---|
 | `notes` | Có | Ghi chú cá nhân |
-| `source_text` | Có nếu không tải file | Transcript hoặc slide dạng text |
-| `source_type` | Có | `transcript` hoặc `slide` |
-| `source_file` | Không | File `.txt`, `.md` hoặc `.pdf` |
-
-Nếu vừa có `source_text` vừa có `source_file`, file upload được ưu tiên.
+| `lesson_id` | Có | `day1-foundation` hoặc `day2-problem` |
+| `slide_number` | Có | Trang slide hiện tại, bắt đầu từ 1 |
 
 ## 15. Xử lý lỗi thường gặp
 

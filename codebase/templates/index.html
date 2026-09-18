@@ -1,97 +1,50 @@
 <!doctype html>
 <html lang="vi">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
   <title>VLearn · AI Note Reviewer</title>
   <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
   <header class="topbar">
-    <div class="brand"><span class="back">←</span><strong>Bài 1 · Day01</strong></div>
-    <div class="progress"><b>4 / 83 slide</b><span><i></i></span></div>
+    <div class="brand"><span class="back">←</span><strong id="headerLesson">{{ lessons[0].title }}</strong></div>
+    <div class="progress"><b id="headerProgress">1 / {{ lessons[0].slide_count }} slide</b><span><i id="progressBar"></i></span></div>
     <div class="top-actions"><button class="ghost">✦ Đặt câu hỏi với AI</button><div class="avatar">L4</div></div>
   </header>
-
-  {% if mock_mode %}
-  <div class="global-alert warning"><b>MOCK UI TEST</b> — kết quả đang được giả lập, không dùng để demo AI hoặc đánh giá.</div>
-  {% elif not has_key %}
-  <div class="global-alert error"><b>Chưa cấu hình AI.</b> Sao chép <code>.env.example</code> thành <code>.env</code> và thêm Gemini hoặc OpenAI API key.</div>
-  {% endif %}
-
+  {% if mock_mode %}<div class="global-alert warning"><b>MOCK UI TEST</b> — kết quả giả lập, không dùng cho demo AI.</div>
+  {% elif not has_key %}<div class="global-alert error"><b>Chưa cấu hình AI.</b> Thêm Gemini hoặc OpenAI API key vào <code>.env</code>.</div>{% endif %}
   <main class="workspace">
     <aside class="lesson-nav">
-      <div class="nav-title">NỘI DUNG BÀI HỌC <span>×</span></div>
-      <h3>Slides⌄</h3>
-      <div class="lesson-item">▣ material_mrxpq9zu_t8e6xs</div>
-      <div class="lesson-item active">▣ day01-slide-v2-blue <small>Đang học</small></div>
-      <div class="lesson-item">▣ day01-llm-foundation-1</div>
-      <h3 class="lab">⚗ Lab 01 — Nền tảng LLM API</h3>
-      <div class="task">① Lấy repo và nhìn thấy đích đến</div>
-      <div class="task">② Dựng môi trường và chạy test</div>
+      <div class="nav-title">NỘI DUNG BÀI HỌC <span>×</span></div><h3>Slides⌄</h3>
+      {% for lesson in lessons %}
+      <button class="lesson-item lesson-button{% if loop.first %} active{% endif %}" data-lesson-id="{{ lesson.id }}">
+        <span>▣ {{ lesson.title }}</span><small>{% if loop.first %}Đang học{% endif %}</small>
+      </button>
+      {% endfor %}
+      <h3 class="lab">⚗ AI Note Reviewer</h3>
+      <div class="task">① Chọn slide đang học</div><div class="task">② Ghi chú bằng lời của bạn</div><div class="task">③ Review với nguồn bài giảng</div>
     </aside>
-
     <section class="learning-area">
       <div class="slide-toolbar">
         <span>✎</span><span>▣</span><span>⌕</span><span>100%</span><span>−</span><span>＋</span>
-        <span class="slide-number">‹ &nbsp; Slide <b>4</b> / 83 &nbsp; ›</span>
+        <span class="slide-number"><button id="previousSlide" aria-label="Slide trước">‹</button> Slide <input id="slideNumber" type="number" min="1" value="1"> / <b id="slideTotal">{{ lessons[0].slide_count }}</b> <button id="nextSlide" aria-label="Slide sau">›</button></span>
       </div>
-      <article class="slide-card">
-        <p class="eyebrow">DAY 01 · NỀN TẢNG LLM</p>
-        <h1>Hôm nay mình đi từ “nghe AI” đến “gọi AI”</h1>
-        <p>Cuối ngày này, mỗi bạn sẽ ra về với 4 thứ:</p>
-        <div class="learning-grid">
-          <div><b>1 · Hiểu được</b><span>Giải thích được LLM hoạt động thế nào.</span></div>
-          <div><b>2 · Nắm được</b><span>Token, context, chi phí và độ trễ liên hệ ra sao.</span></div>
-          <div><b>3 · Gọi được</b><span>Lần gọi API đầu tiên và cấu trúc một lần gọi model.</span></div>
-          <div class="green"><b>4 · Build được</b><span>Một chatbot dòng lệnh có streaming.</span></div>
-        </div>
-        <div class="slide-footer">Không cần nền toán. Chỉ cần tò mò và một chiếc máy tính.</div>
-      </article>
+      <div class="slide-card"><iframe id="slideViewer" title="Slide bài giảng" src="{{ lessons[0].slide_url }}#page=1&toolbar=0&navpanes=0"></iframe></div>
     </section>
-
     <aside class="note-panel">
-      <div class="note-heading">
-        <div><span class="spark">✦</span><h2>Ghi chú theo slide</h2></div>
-        <span class="saved" id="saveState">Chưa lưu</span>
+      <div class="note-heading"><div><span class="spark">✦</span><h2>Ghi chú theo slide</h2></div><span class="saved" id="saveState">Chưa lưu</span></div>
+      <p class="helper">Viết bằng lời của bạn. AI chỉ đối chiếu với slide và transcript của bài hiện tại, không chấm điểm.</p>
+      <label for="notes">Ghi chú cá nhân</label><textarea id="notes" placeholder="Ví dụ: Một token luôn tương ứng với đúng một từ..."></textarea>
+      <div class="source-box auto-source">
+        <div class="source-status"><span>✓</span><div><b>Nguồn được liên kết tự động</b><small id="sourceStatus">Slide 1 + transcript của bài</small></div></div>
+        <p>AI chỉ nhận trang hiện tại và các đoạn transcript liên quan nhất của đúng bài giảng.</p>
       </div>
-      <p class="helper">Viết bằng lời của bạn. AI chỉ đối chiếu với nguồn, không chấm điểm.</p>
-
-      <label for="notes">Ghi chú cá nhân</label>
-      <textarea id="notes" placeholder="Ví dụ: Token càng dài thì API luôn trả lời nhanh hơn..."></textarea>
-
-      <details class="source-box" open>
-        <summary>Nguồn sự thật <span>Transcript / slide</span></summary>
-        <div class="source-type">
-          <label><input type="radio" name="sourceType" value="transcript" checked> Transcript</label>
-          <label><input type="radio" name="sourceType" value="slide"> Slide</label>
-        </div>
-        <textarea id="source" placeholder="Dán transcript có mã [T03-N001], hoặc nội dung slide..."></textarea>
-        <label class="file-label">Tải .txt, .md hoặc .pdf
-          <input id="sourceFile" type="file" accept=".txt,.md,.pdf">
-        </label>
-      </details>
-
       <button class="primary" id="reviewButton"><span>✦</span> Review notes</button>
-      <div class="loading hidden" id="loading"><i></i><span>Đang đối chiếu từng nhận định với nguồn…</span></div>
-      <div class="api-error hidden" id="apiError"></div>
-
-      <section id="results" class="results hidden">
-        <div class="results-title"><h2>Kết quả rà soát</h2><span id="providerBadge"></span></div>
-        <div id="findingList"></div>
-      </section>
-
-      <section id="draftArea" class="draft-area hidden">
-        <div class="results-title"><h2>Bản nháp sau rà soát</h2><span>Chưa áp dụng</span></div>
-        <textarea id="draftNotes"></textarea>
-        <div class="draft-actions">
-          <button class="secondary" id="cancelDraft">Hủy bản nháp</button>
-          <button class="confirm" id="confirmDraft">Xác nhận cập nhật</button>
-        </div>
-      </section>
+      <div class="loading hidden" id="loading"><i></i><span>Đang đối chiếu với slide và transcript…</span></div><div class="api-error hidden" id="apiError"></div>
+      <section id="results" class="results hidden"><div class="results-title"><h2>Kết quả rà soát</h2><span id="providerBadge"></span></div><div id="findingList"></div></section>
+      <section id="draftArea" class="draft-area hidden"><div class="results-title"><h2>Bản nháp sau rà soát</h2><span>Chưa áp dụng</span></div><textarea id="draftNotes"></textarea><div class="draft-actions"><button class="secondary" id="cancelDraft">Hủy bản nháp</button><button class="confirm" id="confirmDraft">Xác nhận cập nhật</button></div></section>
     </aside>
   </main>
-  <script src="{{ url_for('static', filename='app.js') }}"></script>
+  <script id="lessonData" type="application/json">{{ lessons|tojson }}</script><script src="{{ url_for('static', filename='app.js') }}"></script>
 </body>
 </html>
-

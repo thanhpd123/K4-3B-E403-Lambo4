@@ -61,6 +61,5 @@ class ReviewResponse(BaseModel):
 
 class ReviewRequest(BaseModel):
     notes: str = Field(min_length=3, max_length=20000)
-    source_text: str = Field(min_length=20, max_length=120000)
-    source_type: str = Field(default="transcript", pattern=r"^(transcript|slide)$")
-
+    lesson_id: str = Field(min_length=1, max_length=80)
+    slide_number: int = Field(ge=1, le=500)

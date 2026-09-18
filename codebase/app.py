@@ -1,17 +1,16 @@
-import io
 import logging
 import os
 from pathlib import Path
 
 from dotenv import load_dotenv
-from flask import Flask, jsonify, render_template, request
+from flask import Flask, jsonify, render_template, request, send_file
 from pydantic import ValidationError
-from pypdf import PdfReader
 
 from .ai_client import AIConfigurationError, AIResponseError, review_notes
+from .lesson_data import get_slide_path, lesson_catalog, review_context
 from .mock_ai import mock_review
 from .schemas import ReviewRequest
-from .source_utils import chunk_source, validate_and_ground
+from .source_utils import validate_and_ground
 
 ROOT = Path(__file__).resolve().parents[1]
 load_dotenv(ROOT / ".env")
@@ -26,40 +25,43 @@ def _bool_env(name: str) -> bool:
     return os.getenv(name, "").strip().lower() in {"1", "true", "yes", "on"}
 
 
-def _extract_upload(file) -> str:
-    content = file.read()
-    if file.filename and file.filename.lower().endswith(".pdf"):
-        reader = PdfReader(io.BytesIO(content))
-        return "\n\n".join(f"Slide {i}\n{page.extract_text() or ''}" for i, page in enumerate(reader.pages, 1))
-    try:
-        return content.decode("utf-8")
-    except UnicodeDecodeError as exc:
-        raise ValueError("File văn bản phải dùng mã hóa UTF-8.") from exc
-
-
 @app.get("/")
 def index():
     has_key = bool(os.getenv("GEMINI_API_KEY") or os.getenv("OPENAI_API_KEY"))
-    return render_template("index.html", has_key=has_key, mock_mode=_bool_env("NOTE_REVIEWER_MOCK"))
+    return render_template(
+        "index.html",
+        has_key=has_key,
+        mock_mode=_bool_env("NOTE_REVIEWER_MOCK"),
+        lessons=lesson_catalog(),
+    )
+
+
+@app.get("/api/lessons")
+def api_lessons():
+    return jsonify(lessons=lesson_catalog())
+
+
+@app.get("/data/slides/<lesson_id>.pdf")
+def lesson_slides(lesson_id: str):
+    try:
+        return send_file(get_slide_path(lesson_id), mimetype="application/pdf", conditional=True)
+    except ValueError as exc:
+        return jsonify(error=str(exc)), 404
 
 
 @app.post("/api/review")
 def api_review():
     try:
-        source_text = request.form.get("source_text", "").strip()
-        uploaded = request.files.get("source_file")
-        if uploaded and uploaded.filename:
-            source_text = _extract_upload(uploaded)
         payload = ReviewRequest.model_validate(
             {
                 "notes": request.form.get("notes", "").strip(),
-                "source_text": source_text,
-                "source_type": request.form.get("source_type", "transcript"),
+                "lesson_id": request.form.get("lesson_id", "").strip(),
+                "slide_number": request.form.get("slide_number", ""),
             }
         )
-        chunks = chunk_source(payload.source_text, payload.source_type)
+        chunks = review_context(payload.lesson_id, payload.slide_number, payload.notes)
         if not chunks:
-            return jsonify(error="Không tách được nội dung nguồn. Hãy chọn file hoặc dán nguồn khác."), 400
+            return jsonify(error="Không tìm được nguồn phù hợp cho slide hiện tại."), 400
 
         if _bool_env("NOTE_REVIEWER_MOCK"):
             response = mock_review(payload.notes, chunks)
@@ -91,4 +93,3 @@ def health():
 
 if __name__ == "__main__":
     app.run(host="127.0.0.1", port=5000, debug=_bool_env("FLASK_DEBUG"))
-
