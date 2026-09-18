@@ -7,6 +7,7 @@ class ReviewStatus(str, Enum):
     correct_complete = "correct_complete"
     misconception = "misconception"
     missing_boundary = "missing_boundary"
+    missing_concept = "missing_concept"
     insufficient_evidence = "insufficient_evidence"
 
 
@@ -28,12 +29,12 @@ class Finding(BaseModel):
     model_config = ConfigDict(extra="forbid")
 
     status: ReviewStatus
-    note_excerpt: str = Field(min_length=1, max_length=1500)
+    note_excerpt: str = Field(max_length=1500)
     finding: str = Field(min_length=1, max_length=1500)
     explanation: str = Field(min_length=1, max_length=2500)
-    citations: list[Citation] = Field(default_factory=list, max_length=5)
-    suggested_revision: str = Field(default="", max_length=2500)
-    review_question: str = Field(default="", max_length=1000)
+    citations: list[Citation] = Field(max_length=5)
+    suggested_revision: str = Field(max_length=2500)
+    review_question: str = Field(max_length=1000)
     confidence: Confidence
 
     @field_validator("suggested_revision")
@@ -46,8 +47,10 @@ class Finding(BaseModel):
 
     @model_validator(mode="after")
     def evidence_required_for_claims(self):
-        if self.status in {ReviewStatus.misconception, ReviewStatus.missing_boundary} and not self.citations:
-            raise ValueError("Misconception and missing_boundary require citations")
+        if self.status in {ReviewStatus.misconception, ReviewStatus.missing_boundary, ReviewStatus.missing_concept} and not self.citations:
+            raise ValueError("Misconception, missing_boundary and missing_concept require citations")
+        if self.status != ReviewStatus.missing_concept and not self.note_excerpt.strip():
+            raise ValueError("note_excerpt is required unless status is missing_concept")
         return self
 
 
@@ -57,6 +60,13 @@ class ReviewResponse(BaseModel):
     findings: list[Finding] = Field(min_length=1, max_length=12)
     provider: str = "unknown"
     is_mock: bool = False
+
+
+class AIReviewPayload(BaseModel):
+    """Strict schema returned by model providers before app metadata is attached."""
+
+    model_config = ConfigDict(extra="forbid")
+    findings: list[Finding] = Field(min_length=1, max_length=12)
 
 
 class ReviewRequest(BaseModel):

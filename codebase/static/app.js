@@ -4,11 +4,38 @@ const notes = $('#notes'), reviewButton = $('#reviewButton'), loading = $('#load
 const apiError = $('#apiError'), results = $('#results'), findingList = $('#findingList');
 const draftArea = $('#draftArea'), draftNotes = $('#draftNotes'), slideViewer = $('#slideViewer');
 const slideNumber = $('#slideNumber'), previousSlide = $('#previousSlide'), nextSlide = $('#nextSlide');
+const workspace = $('.workspace'), openNav = $('#openNav'), closeNav = $('#closeNav'), noteResizer = $('#noteResizer');
 const labels = {correct_complete:['Đúng và đủ','correct_complete'],misconception:['Có điểm hiểu sai','misconception'],missing_boundary:['Thiếu điều kiện quan trọng','missing_boundary'],insufficient_evidence:['Chưa đủ căn cứ','insufficient_evidence']};
 const noteStore = new Map();
 let currentLesson = lessons[0], currentSlide = 1, currentFindings = [];
 const escapeHtml = (value='') => value.replace(/[&<>'"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c]));
 const noteKey = () => `${currentLesson.id}:${currentSlide}`;
+
+function setNavCollapsed(collapsed){
+  workspace.classList.toggle('nav-collapsed',collapsed);openNav.classList.toggle('hidden',!collapsed);
+  localStorage.setItem('noteReviewer.navCollapsed',String(collapsed));
+}
+closeNav.addEventListener('click',()=>setNavCollapsed(true));
+openNav.addEventListener('click',()=>setNavCollapsed(false));
+setNavCollapsed(localStorage.getItem('noteReviewer.navCollapsed')==='true');
+
+const storedWidth=Number(localStorage.getItem('noteReviewer.noteWidth'));
+if(storedWidth>=320)document.documentElement.style.setProperty('--note-width',`${storedWidth}px`);
+noteResizer.addEventListener('pointerdown',event=>{
+  event.preventDefault();noteResizer.setPointerCapture(event.pointerId);document.body.classList.add('resizing');
+});
+noteResizer.addEventListener('pointermove',event=>{
+  if(!noteResizer.hasPointerCapture(event.pointerId))return;
+  const maxWidth=Math.min(720,window.innerWidth*0.55);const width=Math.max(320,Math.min(maxWidth,window.innerWidth-event.clientX));
+  document.documentElement.style.setProperty('--note-width',`${Math.round(width)}px`);
+});
+function finishResize(event){
+  if(noteResizer.hasPointerCapture(event.pointerId))noteResizer.releasePointerCapture(event.pointerId);
+  document.body.classList.remove('resizing');
+  const width=parseInt(getComputedStyle(document.documentElement).getPropertyValue('--note-width'),10);if(width)localStorage.setItem('noteReviewer.noteWidth',String(width));
+}
+noteResizer.addEventListener('pointerup',finishResize);noteResizer.addEventListener('pointercancel',finishResize);
+noteResizer.addEventListener('dblclick',()=>{document.documentElement.style.setProperty('--note-width','390px');localStorage.setItem('noteReviewer.noteWidth','390')});
 
 function setBusy(busy){reviewButton.disabled=busy;loading.classList.toggle('hidden',!busy)}
 function showError(message){apiError.textContent=message;apiError.classList.remove('hidden')}
@@ -45,8 +72,9 @@ function renderFinding(finding,index){
   const [label,css]=labels[finding.status]||labels.insufficient_evidence;
   const citations=finding.citations.map(c=>`<details class="citation" id="citation-${index}"><summary>${escapeHtml(c.source_id)} · ${escapeHtml(c.source_type)}</summary><blockquote>“${escapeHtml(c.quote)}”</blockquote></details>`).join('');
   const suggestion=finding.suggested_revision?`<div class="suggestion"><small>Bản sửa gợi ý — chưa áp dụng</small>${escapeHtml(finding.suggested_revision)}</div>`:'';
+  const guided=finding.status==='missing_boundary'&&finding.review_question?`<div class="guided-fill"><label for="guided-${index}">Câu hỏi gợi mở để bạn tự bổ sung</label><p>${escapeHtml(finding.review_question)}</p><textarea id="guided-${index}" placeholder="Viết câu trả lời bằng lời của bạn..."></textarea><button data-action="Dùng câu trả lời" data-index="${index}">Đưa câu trả lời vào bản nháp</button></div>`:'';
   const buttons=actionLabels(finding.status).map(action=>`<button class="${['Sửa nháp','Thêm vào ghi chú'].includes(action)?'apply':''}" data-action="${escapeHtml(action)}" data-index="${index}">${escapeHtml(action)}</button>`).join('');
-  return `<article class="finding ${css}" data-card="${index}"><div class="finding-head"><span class="status">${label}</span><span class="confidence">Độ tin cậy: ${escapeHtml(finding.confidence)}</span></div><p class="excerpt">“${escapeHtml(finding.note_excerpt)}”</p><p><b>${escapeHtml(finding.finding)}</b></p><p>${escapeHtml(finding.explanation)}</p>${citations}${suggestion}${finding.review_question?`<p class="review-question">Tự kiểm: ${escapeHtml(finding.review_question)}</p>`:''}<div class="actions">${buttons}</div></article>`;
+  return `<article class="finding ${css}" data-card="${index}"><div class="finding-head"><span class="status">${label}</span><span class="confidence">Độ tin cậy: ${escapeHtml(finding.confidence)}</span></div><p class="excerpt">“${escapeHtml(finding.note_excerpt)}”</p><p><b>${escapeHtml(finding.finding)}</b></p><p>${escapeHtml(finding.explanation)}</p>${citations}${suggestion}${guided}${finding.status!=='missing_boundary'&&finding.review_question?`<p class="review-question">Tự kiểm: ${escapeHtml(finding.review_question)}</p>`:''}<div class="actions">${buttons}</div></article>`;
 }
 
 reviewButton.addEventListener('click',async()=>{
@@ -60,6 +88,7 @@ reviewButton.addEventListener('click',async()=>{
 findingList.addEventListener('click',event=>{
   const button=event.target.closest('button[data-action]');if(!button)return;const index=Number(button.dataset.index),finding=currentFindings[index],action=button.dataset.action;
   if(action==='Xem nguồn'){const citation=$(`#citation-${index}`);if(citation){citation.open=true;citation.scrollIntoView({behavior:'smooth',block:'center'})}return}
+  if(action==='Dùng câu trả lời'){const answer=$(`#guided-${index}`).value.trim();if(!answer){$(`#guided-${index}`).focus();return}const original=notes.value;const base=original.includes(finding.note_excerpt)&&finding.suggested_revision?original.replace(finding.note_excerpt,finding.suggested_revision):original;draftNotes.value=`${base.trim()}\n\nBổ sung của tôi: ${answer}`;draftArea.classList.remove('hidden');draftArea.scrollIntoView({behavior:'smooth'});return}
   if(['Sửa nháp','Thêm vào ghi chú'].includes(action)){const original=notes.value;draftNotes.value=original.includes(finding.note_excerpt)?original.replace(finding.note_excerpt,finding.suggested_revision):`${original.trim()}\n\n${finding.suggested_revision}`.trim();draftArea.classList.remove('hidden');draftArea.scrollIntoView({behavior:'smooth'});return}
   if(action==='Bổ sung ghi chú'){notes.focus();return}if(action==='Chọn bài khác'){document.querySelector('.lesson-nav').scrollIntoView({behavior:'smooth'});return}button.closest('.finding').style.opacity='.5';
 });

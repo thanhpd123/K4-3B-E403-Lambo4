@@ -1,0 +1,129 @@
+:root {
+  --nav-width: 260px;
+  --note-width: 390px;
+}
+
+.workspace {
+  grid-template-columns: var(--nav-width) minmax(420px, 1fr) 7px var(--note-width);
+  transition: grid-template-columns 180ms ease;
+}
+
+.workspace.nav-collapsed {
+  --nav-width: 0px;
+}
+
+.workspace.nav-collapsed .lesson-nav {
+  opacity: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.lesson-nav {
+  min-width: 0;
+  transition: opacity 140ms ease;
+}
+
+.nav-title button {
+  border: 0;
+  background: transparent;
+  color: #fff;
+  font-size: 22px;
+  cursor: pointer;
+  line-height: 1;
+}
+
+.open-nav {
+  position: fixed;
+  left: 10px;
+  top: 78px;
+  z-index: 30;
+  width: 38px;
+  height: 38px;
+  border: 1px solid #52606b;
+  border-radius: 9px;
+  background: #25323b;
+  color: #fff;
+  font-size: 20px;
+  cursor: pointer;
+  box-shadow: 0 4px 14px #0007;
+}
+
+.note-resizer {
+  background: #20272d;
+  border-left: 1px solid #39434b;
+  border-right: 1px solid #39434b;
+  cursor: col-resize;
+  position: relative;
+  touch-action: none;
+}
+
+.note-resizer::after {
+  content: "";
+  position: absolute;
+  left: 2px;
+  top: 45%;
+  width: 2px;
+  height: 52px;
+  border-radius: 2px;
+  background: #71808a;
+}
+
+.note-resizer:hover,
+body.resizing .note-resizer {
+  background: #168da7;
+}
+
+body.resizing {
+  cursor: col-resize;
+  user-select: none;
+}
+
+body.resizing iframe {
+  pointer-events: none;
+}
+
+.guided-fill {
+  margin-top: 12px;
+  padding: 11px;
+  border-radius: 8px;
+  border: 1px solid #705d2e;
+  background: #302a1d;
+}
+
+.guided-fill label {
+  color: #ffd47f;
+  margin: 0 0 7px;
+}
+
+.guided-fill p {
+  margin: 0 0 9px;
+  color: #f2e1bc;
+}
+
+.guided-fill textarea {
+  min-height: 78px;
+  resize: vertical;
+}
+
+.guided-fill button {
+  width: 100%;
+  margin-top: 8px;
+  border: 1px solid #9a7832;
+  background: #6b501b;
+  color: #fff;
+  border-radius: 7px;
+  padding: 8px;
+  cursor: pointer;
+  font-weight: 700;
+}
+
+@media (max-width: 1000px) {
+  :root { --note-width: 350px; }
+  .workspace { grid-template-columns: var(--nav-width) minmax(360px, 1fr) 7px var(--note-width); }
+}
+
+@media (max-width: 850px) {
+  .workspace { display: block; }
+  .note-resizer { display: none; }
+  .open-nav { display: none; }
+}
