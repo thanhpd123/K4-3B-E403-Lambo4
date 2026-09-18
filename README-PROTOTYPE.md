@@ -42,7 +42,8 @@ Golden set nằm trong `eval/golden_set.json`. `eval/results_round_1.json` chủ
 
 ## Cấu trúc chính
 
-- `codebase/app.py`: Flask API, upload PDF/text và error handling.
+- `codebase/app.py`: Flask API, phục vụ slide PDF và error handling.
+- `codebase/lesson_data.py`: ánh xạ bài học, đọc trang PDF và truy xuất transcript liên quan.
 - `codebase/ai_client.py`: chọn Gemini trước, fallback OpenAI khi không có Gemini key.
 - `codebase/prompt.py`: system prompt và JSON contract.
 - `codebase/schemas.py`: Pydantic schema.

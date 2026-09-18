@@ -12,7 +12,7 @@ class SourceChunk:
     text: str
 
 
-TRANSCRIPT_ID = re.compile(r"\[(T\d{2}-N\d{3})\]")
+TRANSCRIPT_ID = re.compile(r"\[(T\d{2}-(?:N)?\d{3})\]")
 SLIDE_ID = re.compile(r"(?:^|\n)\s*(?:#{1,3}\s*)?Slide\s+(\d+)\b", re.IGNORECASE)
 
 
@@ -47,17 +47,19 @@ def chunk_source(source_text: str, source_type: str) -> list[SourceChunk]:
 
 
 def validate_and_ground(findings: list[Finding], chunks: list[SourceChunk]) -> list[Finding]:
-    by_id = {chunk.source_id: chunk for chunk in chunks}
+    by_id: dict[str, list[SourceChunk]] = {}
+    for chunk in chunks:
+        by_id.setdefault(chunk.source_id, []).append(chunk)
     grounded: list[Finding] = []
     for finding in findings:
         valid: list[Citation] = []
         for citation in finding.citations:
-            chunk = by_id.get(citation.source_id)
-            if chunk and citation.source_type == chunk.source_type and normalize(citation.quote) in normalize(chunk.text):
+            candidates = by_id.get(citation.source_id, [])
+            if any(citation.source_type == chunk.source_type and normalize(citation.quote) in normalize(chunk.text) for chunk in candidates):
                 valid.append(citation)
 
         finding.citations = valid
-        if finding.status in {ReviewStatus.misconception, ReviewStatus.missing_boundary} and not valid:
+        if finding.status in {ReviewStatus.misconception, ReviewStatus.missing_boundary, ReviewStatus.missing_concept} and not valid:
             finding.status = ReviewStatus.insufficient_evidence
             finding.finding = "Không đủ căn cứ để xác nhận nhận định ban đầu."
             finding.explanation = "Citation do AI cung cấp không khớp chính xác với nguồn đã chọn, nên hệ thống không kết luận ghi chú sai hoặc thiếu."
@@ -65,4 +67,3 @@ def validate_and_ground(findings: list[Finding], chunks: list[SourceChunk]) -> l
             finding.confidence = "low"
         grounded.append(finding)
     return grounded
-
