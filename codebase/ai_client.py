@@ -7,7 +7,7 @@ from dataclasses import dataclass
 from pydantic import ValidationError
 
 from .prompt import SYSTEM_PROMPT, build_user_prompt
-from .schemas import ReviewResponse
+from .schemas import AIReviewPayload, ReviewResponse
 from .source_utils import SourceChunk
 
 logger = logging.getLogger(__name__)
@@ -72,6 +72,14 @@ def _call_openai(prompt: str) -> ReviewResponse:
         instructions=SYSTEM_PROMPT,
         input=prompt,
         temperature=0.1,
+        text={
+            "format": {
+                "type": "json_schema",
+                "name": "note_review",
+                "schema": AIReviewPayload.model_json_schema(),
+                "strict": True,
+            }
+        },
     )
     return _parse(result.output_text)
 
@@ -87,4 +95,3 @@ def review_notes(notes: str, chunks: list[SourceChunk]) -> AIResult:
     raise AIConfigurationError(
         "Chưa cấu hình API key. Hãy tạo file .env từ .env.example và điền GEMINI_API_KEY hoặc OPENAI_API_KEY."
     )
-

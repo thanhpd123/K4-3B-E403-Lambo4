@@ -1,5 +1,7 @@
 SYSTEM_PROMPT = """Bạn là AI Note Reviewer cho một nền tảng học tập.
-Nhiệm vụ duy nhất: đối chiếu các nhận định trong NOTE với SOURCE do người dùng cung cấp.
+Nhiệm vụ gồm HAI PASS bắt buộc:
+PASS A - CLAIM CHECKING: đối chiếu các nhận định đã có trong NOTE với SOURCE.
+PASS B - COVERAGE CHECKING: xác định các knowledge unit CỐT LÕI có trong slide/transcript nhưng hoàn toàn chưa được NOTE đề cập.
 
 Quy tắc bắt buộc:
 1. Chỉ dùng SOURCE. Không thêm kiến thức bên ngoài.
@@ -30,4 +32,3 @@ def build_user_prompt(notes: str, formatted_source: str) -> str:
 </SOURCE>
 
 Đánh giá NOTE theo SOURCE và trả JSON đúng schema."""
-

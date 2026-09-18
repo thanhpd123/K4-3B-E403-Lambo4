@@ -4,6 +4,7 @@
   <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
   <title>VLearn · AI Note Reviewer</title>
   <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='resize.css') }}">
 </head>
 <body>
   <header class="topbar">
@@ -15,7 +16,7 @@
   {% elif not has_key %}<div class="global-alert error"><b>Chưa cấu hình AI.</b> Thêm Gemini hoặc OpenAI API key vào <code>.env</code>.</div>{% endif %}
   <main class="workspace">
     <aside class="lesson-nav">
-      <div class="nav-title">NỘI DUNG BÀI HỌC <span>×</span></div><h3>Slides⌄</h3>
+      <div class="nav-title">NỘI DUNG BÀI HỌC <button id="closeNav" aria-label="Thu gọn nội dung bài học">×</button></div><h3>Slides⌄</h3>
       {% for lesson in lessons %}
       <button class="lesson-item lesson-button{% if loop.first %} active{% endif %}" data-lesson-id="{{ lesson.id }}">
         <span>▣ {{ lesson.title }}</span><small>{% if loop.first %}Đang học{% endif %}</small>
@@ -24,6 +25,7 @@
       <h3 class="lab">⚗ AI Note Reviewer</h3>
       <div class="task">① Chọn slide đang học</div><div class="task">② Ghi chú bằng lời của bạn</div><div class="task">③ Review với nguồn bài giảng</div>
     </aside>
+    <button id="openNav" class="open-nav hidden" aria-label="Mở nội dung bài học">☰</button>
     <section class="learning-area">
       <div class="slide-toolbar">
         <span>✎</span><span>▣</span><span>⌕</span><span>100%</span><span>−</span><span>＋</span>
@@ -31,6 +33,7 @@
       </div>
       <div class="slide-card"><iframe id="slideViewer" title="Slide bài giảng" src="{{ lessons[0].slide_url }}#page=1&toolbar=0&navpanes=0"></iframe></div>
     </section>
+    <div id="noteResizer" class="note-resizer" title="Kéo để thay đổi độ rộng Slide và Ghi chú"></div>
     <aside class="note-panel">
       <div class="note-heading"><div><span class="spark">✦</span><h2>Ghi chú theo slide</h2></div><span class="saved" id="saveState">Chưa lưu</span></div>
       <p class="helper">Viết bằng lời của bạn. AI chỉ đối chiếu với slide và transcript của bài hiện tại, không chấm điểm.</p>
