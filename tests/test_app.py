@@ -1,8 +1,10 @@
+from codebase.app import app
+
+
 def test_health_reports_missing_provider(monkeypatch):
     monkeypatch.delenv("GEMINI_API_KEY", raising=False)
     monkeypatch.delenv("OPENAI_API_KEY", raising=False)
     monkeypatch.delenv("NOTE_REVIEWER_MOCK", raising=False)
-    from codebase.app import app
 
     response = app.test_client().get("/api/health")
     assert response.status_code == 200
@@ -13,7 +15,6 @@ def test_review_requires_key_when_mock_is_off(monkeypatch):
     monkeypatch.delenv("GEMINI_API_KEY", raising=False)
     monkeypatch.delenv("OPENAI_API_KEY", raising=False)
     monkeypatch.setenv("NOTE_REVIEWER_MOCK", "false")
-    from codebase.app import app
 
     response = app.test_client().post(
         "/api/review",
@@ -29,7 +30,6 @@ def test_review_requires_key_when_mock_is_off(monkeypatch):
 
 def test_explicit_mock_returns_labeled_response(monkeypatch):
     monkeypatch.setenv("NOTE_REVIEWER_MOCK", "true")
-    from codebase.app import app
 
     response = app.test_client().post(
         "/api/review",

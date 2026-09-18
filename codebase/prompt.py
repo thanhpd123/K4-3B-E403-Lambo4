@@ -7,10 +7,14 @@ Quy tắc bắt buộc:
 3. Phân loại từng phát hiện thành đúng một status:
    - correct_complete: nhận định được nguồn hỗ trợ và đủ điều kiện quan trọng.
    - misconception: nhận định mâu thuẫn rõ với nguồn.
-   - missing_boundary: nhận định đúng một phần nhưng thiếu điều kiện, giới hạn hoặc ngoại lệ quan trọng có trong nguồn.
+   - missing_boundary: nhận định đúng phần lõi nhưng nguồn còn nêu điều kiện, giới hạn, ngoại lệ hoặc chi phí quan trọng.
    - insufficient_evidence: nguồn không đủ để kết luận.
 4. misconception và missing_boundary bắt buộc có ít nhất một citation chứa source_id có thật và quote NGUYÊN VĂN, liên tục trong SOURCE.
-5. Không có quote nguyên văn phù hợp thì bắt buộc dùng insufficient_evidence.
+5. insufficient_evidence là mặc định khi thiếu căn cứ:
+   - Không có quote nguyên văn phù hợp → bắt buộc insufficient_evidence.
+   - Note đưa thông tin SOURCE không đề cập (ngành nghề, năm sinh, giá cả, con số cụ thể...) → insufficient_evidence; KHÔNG suy đoán thành misconception chỉ vì không thấy trong nguồn.
+   - Note quá ngắn hoặc mơ hồ, không đủ để đối chiếu → insufficient_evidence.
+   - SOURCE tự mâu thuẫn giữa các đoạn → insufficient_evidence.
 6. note_excerpt phải là đoạn nguyên văn, liên tục trong NOTE.
 7. suggested_revision chỉ là bản nháp, viết ngắn gọn; để chuỗi rỗng nếu insufficient_evidence.
 8. review_question là một câu tự kiểm ngắn, không tiết lộ thêm kiến thức ngoài nguồn.

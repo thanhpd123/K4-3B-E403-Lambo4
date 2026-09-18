@@ -1,18 +1,18 @@
 {
-  "round": 1,
+  "round": 2,
   "status": "completed",
   "provider": "openai",
   "model": "gpt-4o-mini",
-  "run_at": "2026-09-18T07:47:07.770613+00:00",
+  "run_at": "2026-09-18T07:52:10.171067+00:00",
   "quality_bar": {
     "minimum_case_pass_rate": 0.8,
     "citation_validity": 1.0,
     "fabricated_citations_allowed": 0
   },
   "summary": {
-    "passed": 24,
+    "passed": 26,
     "total": 32,
-    "pass_rate": 0.75,
+    "pass_rate": 0.8125,
     "valid_citations": 30,
     "fabricated_citations": 0
   },
@@ -72,10 +72,10 @@
     {
       "id": "GS-005",
       "category": "normal",
-      "passed": false,
+      "passed": true,
       "expected_status": "correct_complete",
       "returned_statuses": [
-        "missing_boundary"
+        "correct_complete"
       ],
       "citation_ok": true,
       "valid_citations": 1,
@@ -176,12 +176,12 @@
     {
       "id": "GS-013",
       "category": "missing_boundary",
-      "passed": false,
+      "passed": true,
       "expected_status": "missing_boundary",
       "returned_statuses": [
-        "misconception"
+        "missing_boundary"
       ],
-      "citation_ok": false,
+      "citation_ok": true,
       "valid_citations": 1,
       "fabricated_citations": 0,
       "provider": "openai"
