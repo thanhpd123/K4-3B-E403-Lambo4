@@ -5,7 +5,6 @@ __pycache__/
 .pytest_cache/
 
 # Team internal & draft files
-reflection/
 presentation/
 demo_backup/
 demo_script.md
