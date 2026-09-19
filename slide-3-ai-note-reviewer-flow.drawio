@@ -1,0 +1,71 @@
+<mxfile host="app.diagrams.net" modified="2026-09-18T00:00:00.000Z" agent="Codex" version="24.7.17">
+  <diagram id="note-reviewer-flow" name="Slide 3 - Luồng hoạt động">
+    <mxGraphModel dx="1600" dy="900" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1600" pageHeight="900" math="0" shadow="0" background="#0B1020">
+      <root>
+        <mxCell id="0"/>
+        <mxCell id="1" parent="0"/>
+
+        <mxCell id="title" value="AI ĐỐI CHIẾU GHI CHÚ VỚI NGUỒN BÀI HỌC" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;fontFamily=Arial;fontSize=30;fontStyle=1;fontColor=#F8FAFC;" vertex="1" parent="1">
+          <mxGeometry x="180" y="35" width="1240" height="44" as="geometry"/>
+        </mxCell>
+        <mxCell id="subtitle" value="AI chỉ đề xuất. Học viên quyết định nội dung được lưu." style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;fontFamily=Arial;fontSize=18;fontColor=#94A3B8;" vertex="1" parent="1">
+          <mxGeometry x="300" y="82" width="1000" height="30" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="step1" value="&lt;b&gt;1. GHI CHÚ CÁ NHÂN&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:16px&quot;&gt;Học viên tự viết theo slide&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;arcSize=16;fillColor=#102A43;strokeColor=#38BDF8;strokeWidth=2;fontFamily=Arial;fontSize=20;fontColor=#E0F2FE;align=center;verticalAlign=middle;spacing=10;" vertex="1" parent="1">
+          <mxGeometry x="210" y="145" width="430" height="105" as="geometry"/>
+        </mxCell>
+        <mxCell id="step2" value="&lt;b&gt;2. NGUỒN BÀI HỌC&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:16px&quot;&gt;Transcript + slide có mã trích dẫn&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;arcSize=16;fillColor=#2A173B;strokeColor=#C084FC;strokeWidth=2;fontFamily=Arial;fontSize=20;fontColor=#F3E8FF;align=center;verticalAlign=middle;spacing=10;" vertex="1" parent="1">
+          <mxGeometry x="960" y="145" width="430" height="105" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="agent" value="&lt;b&gt;3. AI NOTE REVIEWER&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:17px&quot;&gt;So sánh tính đúng và mức độ đầy đủ&lt;/font&gt;&lt;br&gt;&lt;font style=&quot;font-size:15px;color:#FDE68A&quot;&gt;Mọi nhận xét đều kèm nguồn&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;arcSize=18;fillColor=#3A2A08;strokeColor=#F59E0B;strokeWidth=3;fontFamily=Arial;fontSize=22;fontColor=#FEF3C7;align=center;verticalAlign=middle;spacing=12;shadow=1;" vertex="1" parent="1">
+          <mxGeometry x="500" y="300" width="600" height="125" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="resultLabel" value="4. KẾT QUẢ ĐỐI CHIẾU" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;fontFamily=Arial;fontSize=18;fontStyle=1;fontColor=#CBD5E1;" vertex="1" parent="1">
+          <mxGeometry x="610" y="466" width="380" height="32" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="correct" value="&lt;b&gt;ĐÚNG VÀ ĐỦ&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:15px&quot;&gt;Xác nhận + trích dẫn&lt;br&gt;Câu hỏi tự kiểm tùy chọn&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;arcSize=16;fillColor=#123524;strokeColor=#22C55E;strokeWidth=2;fontFamily=Arial;fontSize=20;fontColor=#DCFCE7;align=center;verticalAlign=middle;spacing=10;" vertex="1" parent="1">
+          <mxGeometry x="115" y="525" width="390" height="125" as="geometry"/>
+        </mxCell>
+        <mxCell id="wrong" value="&lt;b&gt;HIỂU SAI&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:15px&quot;&gt;Chỉ rõ phần sai + nguồn&lt;br&gt;Đề xuất bản sửa&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;arcSize=16;fillColor=#3B1D2A;strokeColor=#FB7185;strokeWidth=2;fontFamily=Arial;fontSize=20;fontColor=#FFE4E6;align=center;verticalAlign=middle;spacing=10;" vertex="1" parent="1">
+          <mxGeometry x="605" y="525" width="390" height="125" as="geometry"/>
+        </mxCell>
+        <mxCell id="missing" value="&lt;b&gt;THIẾU Ý QUAN TRỌNG&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:15px&quot;&gt;Nêu điều kiện còn thiếu&lt;br&gt;Gợi ý bổ sung ngắn gọn&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;arcSize=16;fillColor=#3A250F;strokeColor=#FB923C;strokeWidth=2;fontFamily=Arial;fontSize=20;fontColor=#FFEDD5;align=center;verticalAlign=middle;spacing=10;" vertex="1" parent="1">
+          <mxGeometry x="1095" y="525" width="390" height="125" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="human" value="&lt;b&gt;HỌC VIÊN GIỮ QUYỀN QUYẾT ĐỊNH&lt;/b&gt;&lt;br&gt;&lt;font style=&quot;font-size:16px&quot;&gt;Xác nhận cập nhật &amp;nbsp;•&amp;nbsp; Sửa đề xuất &amp;nbsp;•&amp;nbsp; Đã biết rồi&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;arcSize=18;fillColor=#102C2A;strokeColor=#2DD4BF;strokeWidth=3;fontFamily=Arial;fontSize=21;fontColor=#CCFBF1;align=center;verticalAlign=middle;spacing=10;" vertex="1" parent="1">
+          <mxGeometry x="420" y="720" width="760" height="105" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="e1" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#38BDF8;strokeWidth=3;endArrow=block;endFill=1;" edge="1" parent="1" source="step1" target="agent">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="e2" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#C084FC;strokeWidth=3;endArrow=block;endFill=1;" edge="1" parent="1" source="step2" target="agent">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="e3" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#22C55E;strokeWidth=3;endArrow=block;endFill=1;" edge="1" parent="1" source="agent" target="correct">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="e4" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#FB7185;strokeWidth=3;endArrow=block;endFill=1;" edge="1" parent="1" source="agent" target="wrong">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="e5" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#FB923C;strokeWidth=3;endArrow=block;endFill=1;" edge="1" parent="1" source="agent" target="missing">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="e6" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#22C55E;strokeWidth=2;endArrow=block;endFill=1;" edge="1" parent="1" source="correct" target="human">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="e7" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#FB7185;strokeWidth=2;endArrow=block;endFill=1;" edge="1" parent="1" source="wrong" target="human">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="e8" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#FB923C;strokeWidth=2;endArrow=block;endFill=1;" edge="1" parent="1" source="missing" target="human">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
