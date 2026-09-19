@@ -8,7 +8,14 @@ from .source_utils import SourceChunk, chunk_source
 
 
 ROOT = Path(__file__).resolve().parents[1]
-DATA_ROOT = ROOT / "build" / "data" / "vlearn-pack"
+_DATA_CANDIDATES = (
+    ROOT / "data" / "vlearn-pack",
+    ROOT / "build" / "data" / "vlearn-pack",
+)
+DATA_ROOT = next(
+    (path for path in _DATA_CANDIDATES if (path / "slides" / "d1-slide-hackathon.pdf").is_file()),
+    _DATA_CANDIDATES[0],
+)
 
 LESSONS = {
     "day1-foundation": {
