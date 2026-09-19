@@ -28,9 +28,9 @@ Mở `http://127.0.0.1:5000`.
 
 ## Chế độ mock
 
-Đặt `NOTE_REVIEWER_MOCK=true` chỉ để kiểm thử UI khi không có API key. Giao diện sẽ hiện banner cảnh báo và response có `is_mock=true`. Chế độ này không được dùng cho video AI thật hoặc kết quả eval.
+- Đặt `NOTE_REVIEWER_MOCK=true` chỉ để kiểm thử UI khi không có API key. Giao diện sẽ hiện banner cảnh báo và response có `is_mock=true`. Chế độ này không được dùng cho video AI thật hoặc kết quả eval.
 
-Nếu không có API key và mock đang tắt, API trả lỗi cấu hình rõ ràng; ứng dụng không hardcode kết quả thay thế.
+- Nếu không có API key và mock đang tắt, API trả lỗi cấu hình rõ ràng; ứng dụng không hardcode kết quả thay thế.
 
 ## Kiểm thử
 
