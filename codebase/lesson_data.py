@@ -8,7 +8,7 @@ from .source_utils import SourceChunk, chunk_source
 
 
 ROOT = Path(__file__).resolve().parents[1]
-DATA_ROOT = ROOT / "build" / "data" / "vlearn-pack"
+DATA_ROOT = ROOT / "data" / "vlearn-pack"
 
 LESSONS = {
     "day1-foundation": {
